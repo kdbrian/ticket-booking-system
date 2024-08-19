@@ -42,7 +42,7 @@ public class RouteServiceImpl implements RouteService {
     @Transactional
     @Override
     public Route updateRoute(Long id, RouteDto dto) {
-        return routeRepository.findById(dto.getScheduleId()).map(route -> {
+        return routeRepository.findById(id).map(route -> {
                     route.setFromLocation(dto.getFromLocation());
                     route.setToLocation(dto.getToLocation());
                     route.setFromLocationName(dto.getFromLocationName());
