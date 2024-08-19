@@ -1,6 +1,6 @@
 package io.github.junrdev.bookingsystem.service.impl;
 
-import io.github.junrdev.bookingsystem.error.model.CompanyNotFoundException;
+import io.github.junrdev.bookingsystem.error.model.NotFoundException;
 import io.github.junrdev.bookingsystem.model.Company;
 import io.github.junrdev.bookingsystem.repository.CompanyRepository;
 import io.github.junrdev.bookingsystem.service.CompanyService;
@@ -39,7 +39,7 @@ public class CompanyServiceImpl implements CompanyService {
         if (companyRepository.existsById(id)) {
             companyRepository.deleteById(id);
         } else
-            throw new CompanyNotFoundException("Company not found with id " + id);
+            throw new NotFoundException("Company not found with id " + id);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class CompanyServiceImpl implements CompanyService {
         if (companyRepository.existsById(id)) {
             return companyRepository.save(company);
         }
-        throw new CompanyNotFoundException("Company not found with id " + id);
+        throw new NotFoundException("Company not found with id " + id);
     }
 
     @Override
@@ -57,6 +57,6 @@ public class CompanyServiceImpl implements CompanyService {
             company.setIsActive(false);
             companyRepository.save(company);
         } else
-            throw new CompanyNotFoundException("Company not found with id " + id);
+            throw new NotFoundException("Company not found with id " + id);
     }
 }

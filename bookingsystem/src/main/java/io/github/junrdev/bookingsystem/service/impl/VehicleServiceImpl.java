@@ -1,7 +1,7 @@
 package io.github.junrdev.bookingsystem.service.impl;
 
 import io.github.junrdev.bookingsystem.dto.VehicleDto;
-import io.github.junrdev.bookingsystem.error.model.CompanyNotFoundException;
+import io.github.junrdev.bookingsystem.error.model.NotFoundException;
 import io.github.junrdev.bookingsystem.model.Vehicle;
 import io.github.junrdev.bookingsystem.repository.RouteRepository;
 import io.github.junrdev.bookingsystem.repository.VehicleRepository;
@@ -31,7 +31,7 @@ public class VehicleServiceImpl implements VehicleService {
                                 .discount(dto.getDiscount())
                                 .price(dto.getPrice())
                                .build()
-                )).orElseThrow(() -> new CompanyNotFoundException("Route not found"));
+                )).orElseThrow(() -> new NotFoundException("Route not found"));
     }
 
     // Retrieve a Vehicle by ID

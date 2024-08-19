@@ -28,4 +28,5 @@ public class Schedule {
 
     @Column(nullable = false)
     private String phone;
+
 }

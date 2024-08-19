@@ -1,13 +1,14 @@
 package io.github.junrdev.bookingsystem.error;
 
 import io.github.junrdev.bookingsystem.error.model.ClientNotFoundException;
-import io.github.junrdev.bookingsystem.error.model.CompanyNotFoundException;
+import io.github.junrdev.bookingsystem.error.model.NotFoundException;
 import io.github.junrdev.bookingsystem.error.model.ErrorResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -60,10 +61,16 @@ public class AppErrorAdvice {
         );
     }
 
-    @ExceptionHandler({CompanyNotFoundException.class, ClientNotFoundException.class})
+    @ExceptionHandler({NotFoundException.class, ClientNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ErrorResponse> handleCompanyNotFoundException(RuntimeException exception) {
-            return new ResponseEntity<>(ErrorResponse.builder().message(exception.getMessage()).statusCode(HttpStatus.NOT_FOUND.value()).build(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(ErrorResponse.builder().message(exception.getMessage()).statusCode(HttpStatus.NOT_FOUND.value()).build(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handleHttpMessageNotReadableException(HttpMessageNotReadableException exception) {
+        return new ResponseEntity<>(ErrorResponse.builder().message(exception.getMessage()).statusCode(HttpStatus.BAD_REQUEST.value()).build(), HttpStatus.BAD_REQUEST);
     }
 
 

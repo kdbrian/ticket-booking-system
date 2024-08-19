@@ -3,10 +3,10 @@ package io.github.junrdev.bookingsystem.error.model;
 import lombok.Builder;
 
 @Builder
-public class CompanyNotFoundException extends RuntimeException {
+public class NotFoundException extends RuntimeException {
     private String message;
 
-    public CompanyNotFoundException(String message) {
+    public NotFoundException(String message) {
         super(message);
         this.message = message;
     }
