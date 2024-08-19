@@ -1,1 +1,4 @@
 *.docx
+!**/bookingsystem/src/main/resources/application-dev.yaml
+.gitignore
+/bookingsystem/src/main/resources/application-dev.yaml
