@@ -1,6 +1,8 @@
 package io.github.junrdev.bookingsystem.service.impl;
 
+import io.github.junrdev.bookingsystem.dto.RouteDto;
 import io.github.junrdev.bookingsystem.dto.ScheduleDto;
+import io.github.junrdev.bookingsystem.dto.VehicleDto;
 import io.github.junrdev.bookingsystem.error.model.NotFoundException;
 import io.github.junrdev.bookingsystem.model.Route;
 import io.github.junrdev.bookingsystem.model.Schedule;
@@ -23,25 +25,48 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     @Transactional
-    public Schedule saveSchedule(ScheduleDto dto) {
+    public ScheduleDto saveSchedule(ScheduleDto dto) {
         return companyRepository.findById(dto.getCompanyId())
-                .map((company ->
-                        scheduleRepository.save(
-                                Schedule.builder()
-                                        .company(company)
-                                        .phone(dto.getPhone())
-                                        .routes(dto.getRoutes().stream().map(routeDto ->
-                                                Route.builder()
-                                                        .fromLocation(routeDto.getFromLocation())
-                                                        .toLocation(routeDto.getToLocation())
-                                                        .fromLocationName(routeDto.getFromLocationName())
-                                                        .toLocationName(routeDto.getToLocationName())
-                                                        .vehicles(routeDto.getVehicles())
-                                                        .build()
-                                        ).toList())
-                                        .build()
-                        )
-                )).orElseThrow(() -> new NotFoundException("Company not found with id " + dto.getCompanyId()));
+                .map((company -> {
+                    Schedule saved = scheduleRepository.save(
+                            Schedule.builder()
+                                    .company(company)
+                                    .phone(dto.getPhone())
+                                    .routes(dto.getRoutes().stream().map(routeDto ->
+                                            Route.builder()
+                                                    .fromLocation(routeDto.getFromLocation())
+                                                    .toLocation(routeDto.getToLocation())
+                                                    .fromLocationName(routeDto.getFromLocationName())
+                                                    .toLocationName(routeDto.getToLocationName())
+                                                    .vehicles(routeDto.getVehicles())
+                                                    .build()
+                                    ).toList())
+                                    .build()
+                    );
+                    dto.setRoutes(
+                            saved.getRoutes().stream().map(route ->
+                                    RouteDto.builder()
+                                            .scheduleId(route.getSchedule().getId())
+                                            .toLocationName(route.getToLocationName())
+                                            .fromLocationName(route.getFromLocationName())
+                                            .fromLocation(route.getFromLocation())
+                                            .toLocation(route.getToLocation())
+                                            .vehicles(route.getVehicles().stream().map(vehicle ->
+                                                    VehicleDto.builder()
+                                                            .vehicleId(vehicle.getVehicleId())
+                                                            .price(vehicle.getPrice())
+                                                            .discount(vehicle.getDiscount())
+                                                            .leavingTime(vehicle.getLeavingTime())
+                                                            .seats(vehicle.getSeats())
+                                                            .seatCount(vehicle.getSeatCount())
+                                                            .build()
+                                            ).toList())
+                                            .id(route.getId())
+                                            .build()
+                            ).toList()
+                    );
+                    return dto;
+                })).orElseThrow(() -> new NotFoundException("Company not found with id " + dto.getCompanyId()));
 
     }
 

@@ -20,5 +20,5 @@ public class RouteDto {
     private Location toLocation;
     private String fromLocationName;
     private String toLocationName;
-    private List<Vehicle> vehicles;
+    private List<VehicleDto> vehicles;
 }

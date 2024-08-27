@@ -5,10 +5,12 @@ import io.github.junrdev.bookingsystem.repository.BookingRepository;
 import io.github.junrdev.bookingsystem.service.BookingService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class BookingServiceImpl implements BookingService {
 
     @Autowired

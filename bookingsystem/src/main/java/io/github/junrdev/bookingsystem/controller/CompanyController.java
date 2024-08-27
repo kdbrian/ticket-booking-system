@@ -3,6 +3,7 @@ package io.github.junrdev.bookingsystem.controller;
 import io.github.junrdev.bookingsystem.model.Company;
 import io.github.junrdev.bookingsystem.service.CompanyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +12,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/companies")
-@RequiredArgsConstructor
 public class CompanyController {
 
     private final CompanyService service;
+
+    @Autowired
+    public CompanyController(CompanyService service) {
+        this.service = service;
+    }
 
     @PostMapping("/new")
     public ResponseEntity<Company> createCompany(@RequestBody Company company) {

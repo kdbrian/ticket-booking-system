@@ -25,11 +25,8 @@ public class AppErrorAdvice {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ErrorResponse> handleNoResourceFoundException(NoResourceFoundException exception) {
         return new ResponseEntity<>(
-                ErrorResponse
-                        .builder()
-                        .statusCode(404)
-                        .message("Failed to match the requested Url. Path [" + exception.getResourcePath() + "]")
-                        .build(),
+//                new ErrorResponse(404,"Failed to match the requested Url. Path [" + exception.getResourcePath() + "]")
+                null,
                 HttpStatus.NOT_FOUND
         );
     }

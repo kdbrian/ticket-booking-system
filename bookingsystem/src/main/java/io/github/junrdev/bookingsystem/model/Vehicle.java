@@ -17,6 +17,7 @@ import java.util.List;
 public class Vehicle {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long vehicleId;
 
     @ManyToOne

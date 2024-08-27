@@ -28,6 +28,11 @@ public class Booking {
     @JoinColumn(name = "schedule_id", nullable = false)
     private Schedule schedule;
 
+    private Vehicle vehicleId;
+
+    @Embedded
+    private Seat seat;
+
     private Boolean isActive = true;
 
     private LocalDateTime bookingDate;

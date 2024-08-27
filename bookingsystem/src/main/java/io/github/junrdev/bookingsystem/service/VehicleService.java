@@ -2,6 +2,7 @@ package io.github.junrdev.bookingsystem.service;
 
 import io.github.junrdev.bookingsystem.dto.VehicleDto;
 import io.github.junrdev.bookingsystem.model.Vehicle;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -22,4 +23,6 @@ public interface VehicleService {
     // Delete a Vehicle by ID
     @Transactional
     void deleteVehicle(Long id);
+
+    VehicleDto updateVehicle(Long id, VehicleDto dto);
 }
