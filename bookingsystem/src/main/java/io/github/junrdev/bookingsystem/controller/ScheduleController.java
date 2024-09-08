@@ -1,10 +1,10 @@
 package io.github.junrdev.bookingsystem.controller;
 
-import io.github.junrdev.bookingsystem.dto.RouteDto;
 import io.github.junrdev.bookingsystem.dto.ScheduleDto;
 import io.github.junrdev.bookingsystem.error.model.NotFoundException;
 import io.github.junrdev.bookingsystem.model.Schedule;
 import io.github.junrdev.bookingsystem.service.ScheduleService;
+import io.github.junrdev.bookingsystem.util.mappers.ScheduleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,21 +19,26 @@ public class ScheduleController {
     //dependency flow
     // company -> schedule exists -> route exists -> vehicle exists -> booking
 
-    @Autowired
-    private ScheduleService scheduleService;
+    private final ScheduleService scheduleService;
+    private final ScheduleMapper scheduleMapper;
 
+    @Autowired
+    public ScheduleController(ScheduleService scheduleService, ScheduleMapper scheduleMapper) {
+        this.scheduleService = scheduleService;
+        this.scheduleMapper = scheduleMapper;
+    }
     // Create or Update a Schedule
+
     @PostMapping("/new")
-    public ResponseEntity<Schedule> createOrUpdateSchedule(@RequestBody ScheduleDto dto) {
-        Schedule savedSchedule = scheduleService.saveSchedule(dto);
-        return ResponseEntity.ok(savedSchedule);
+    public ResponseEntity<ScheduleDto> createOrUpdateSchedule(@RequestBody ScheduleDto dto) {
+        return ResponseEntity.ok(scheduleService.saveSchedule(dto));
     }
 
     // Retrieve a Schedule by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Schedule> getScheduleById(@PathVariable Long id) {
-        Optional<Schedule> schedule = scheduleService.getScheduleById(id);
-        return schedule.map(ResponseEntity::ok)
+    public ResponseEntity<ScheduleDto> getScheduleById(@PathVariable Long id) {
+        Optional<Schedule> optschedule = scheduleService.getScheduleById(id);
+        return optschedule.map(schedule -> ResponseEntity.ok(scheduleMapper.scheduleToScheduleDto(schedule)))
                 .orElseThrow(() -> new NotFoundException("Failed to fetch schedule with id " + id));
     }
 
@@ -41,23 +46,7 @@ public class ScheduleController {
     @GetMapping("/")
     public ResponseEntity<List<ScheduleDto>> getAllSchedules() {
         List<Schedule> schedules = scheduleService.getAllSchedules();
-        return ResponseEntity.ok(schedules.stream().map(schedule -> ScheduleDto
-                .builder()
-                .companyId(schedule.getCompany().getId())
-                .routes(schedule.getRoutes().stream().map(route -> RouteDto
-                                //mapping the routes back
-                                .builder()
-                                .scheduleId(schedule.getId())
-                                .fromLocation(route.getFromLocation())
-                                .toLocation(route.getToLocation())
-                                .fromLocationName(route.getFromLocationName())
-                                .toLocationName(route.getToLocationName())
-                                .vehicles(route.getVehicles())
-                                .build()
-                        ).toList()
-                )
-                .phone(schedule.getPhone())
-                .build()).toList());
+        return ResponseEntity.ok(schedules.stream().map(scheduleMapper::scheduleToScheduleDto).toList());
     }
 
     // Delete a Schedule by ID

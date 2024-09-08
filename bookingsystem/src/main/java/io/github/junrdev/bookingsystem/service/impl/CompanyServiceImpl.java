@@ -54,7 +54,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public void deactivateAccount(Long id, Company company) {
         if (companyRepository.existsById(id)) {
-            company.setIsActive(false);
+            company.setActive(false);
             companyRepository.save(company);
         } else
             throw new NotFoundException("Company not found with id " + id);

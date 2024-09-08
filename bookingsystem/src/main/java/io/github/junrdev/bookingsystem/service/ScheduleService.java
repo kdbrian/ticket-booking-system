@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface ScheduleService {
 
-    Schedule saveSchedule(ScheduleDto dto);
+    ScheduleDto saveSchedule(ScheduleDto dto);
 
     Optional<Schedule> getScheduleById(Long id);
 

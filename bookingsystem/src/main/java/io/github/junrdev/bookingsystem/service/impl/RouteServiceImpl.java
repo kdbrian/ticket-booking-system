@@ -6,37 +6,38 @@ import io.github.junrdev.bookingsystem.model.Route;
 import io.github.junrdev.bookingsystem.repository.RouteRepository;
 import io.github.junrdev.bookingsystem.repository.ScheduleRepository;
 import io.github.junrdev.bookingsystem.service.RouteService;
+import io.github.junrdev.bookingsystem.util.mappers.RouteMapper;
+import io.github.junrdev.bookingsystem.util.mappers.VehicleMappers;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class RouteServiceImpl implements RouteService {
 
 
     private final RouteRepository routeRepository;
     private final ScheduleRepository scheduleRepository;
+    private final RouteMapper routeMapper = RouteMapper.INSTANCE;
+    private final VehicleMappers vehicleMappers = VehicleMappers.INSTANCE;
+
+    @Autowired
+    public RouteServiceImpl(RouteRepository routeRepository, ScheduleRepository scheduleRepository) {
+        this.routeRepository = routeRepository;
+        this.scheduleRepository = scheduleRepository;
+    }
 
     // Create or Update a Route
     @Transactional
     @Override
     public Route saveRoute(RouteDto dto) {
-        return scheduleRepository.findById(dto.getScheduleId()).map(schedule ->
-                routeRepository.save(
-                        Route.builder()
-                                .fromLocation(dto.getFromLocation())
-                                .toLocation(dto.getToLocation())
-                                .fromLocationName(dto.getFromLocationName())
-                                .toLocationName(dto.getToLocationName())
-                                .schedule(schedule)
-                                .vehicles(dto.getVehicles())
-                                .build()
-                )
-        ).orElseThrow(() -> new NotFoundException("Failed to fetch schedule with id " + dto.getScheduleId()));
+        return scheduleRepository
+                .findById(dto.getScheduleId())
+                .map(schedule -> routeRepository.save(routeMapper.routeDtoToRoute(dto)))
+                .orElseThrow(() -> new NotFoundException("Failed to fetch schedule with id " + dto.getScheduleId()));
     }
 
     @Transactional
@@ -48,7 +49,7 @@ public class RouteServiceImpl implements RouteService {
                     route.setFromLocationName(dto.getFromLocationName());
                     route.setToLocationName(dto.getToLocationName());
                     route.setSchedule(route.getSchedule());
-                    route.setVehicles(dto.getVehicles());
+                    route.setVehicles(dto.getVehicles().stream().map(vehicleMappers::toEntity).toList());
                     return routeRepository.save(route);
                 }
         ).orElseThrow(() -> new NotFoundException("Failed to fetch route with id " + id));

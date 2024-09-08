@@ -22,4 +22,6 @@ public interface VehicleService {
     // Delete a Vehicle by ID
     @Transactional
     void deleteVehicle(Long id);
+
+    VehicleDto updateVehicle(Long id, VehicleDto dto);
 }

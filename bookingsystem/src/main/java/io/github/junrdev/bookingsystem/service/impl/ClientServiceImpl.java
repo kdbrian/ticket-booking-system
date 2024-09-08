@@ -68,7 +68,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public void deactivateClient(Long id, Client client) {
         if (clientRepository.existsById(id)) {
-            client.setIsActive(false);
+            client.setActive(false);
             clientRepository.save(client);
         } else
             throw new ClientNotFoundException("Client not found");

@@ -3,16 +3,8 @@ package io.github.junrdev.bookingsystem.model;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Embeddable
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 public class Kyc {
 
     private String identificationNumber;
@@ -29,4 +21,45 @@ public class Kyc {
         REFILL
     }
 
+    public Kyc() {
+    }
+
+    public Kyc(String identificationNumber, String uploadedFormLink, FormEvaluation formEvaluation) {
+        this.identificationNumber = identificationNumber;
+        this.uploadedFormLink = uploadedFormLink;
+        this.formEvaluation = formEvaluation;
+    }
+
+    public String getIdentificationNumber() {
+        return identificationNumber;
+    }
+
+    public void setIdentificationNumber(String identificationNumber) {
+        this.identificationNumber = identificationNumber;
+    }
+
+    public String getUploadedFormLink() {
+        return uploadedFormLink;
+    }
+
+    public void setUploadedFormLink(String uploadedFormLink) {
+        this.uploadedFormLink = uploadedFormLink;
+    }
+
+    public FormEvaluation getFormEvaluation() {
+        return formEvaluation;
+    }
+
+    public void setFormEvaluation(FormEvaluation formEvaluation) {
+        this.formEvaluation = formEvaluation;
+    }
+
+    @Override
+    public String toString() {
+        return "Kyc{" +
+                "identificationNumber='" + identificationNumber + '\'' +
+                ", uploadedFormLink='" + uploadedFormLink + '\'' +
+                ", formEvaluation=" + formEvaluation +
+                '}';
+    }
 }

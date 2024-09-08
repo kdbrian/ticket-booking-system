@@ -3,17 +3,27 @@ server:
   servlet:
     context-path: /booking/api/v1
 
+logging:
+#  file:
+#    name: /var/tmp/logs.txt
+
+#  level:
+#    root: DEBUG
+#    io.github.junrdev: WARN
+
 spring:
   app:
     dev: kdb_dev
-
 
   datasource:
     url: jdbc:mysql://localhost:3306/bookingsystemdb
     username: root
     password: 2022
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
 
   jpa:
-
     hibernate:
       ddl-auto: update
+      show-sql: true
+

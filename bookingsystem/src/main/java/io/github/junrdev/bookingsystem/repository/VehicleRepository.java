@@ -1,6 +1,5 @@
 package io.github.junrdev.bookingsystem.repository;
 
-import io.github.junrdev.bookingsystem.model.Schedule;
 import io.github.junrdev.bookingsystem.model.Vehicle;
 import org.springframework.data.jpa.repository.JpaRepository;
 
