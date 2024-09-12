@@ -1,0 +1,30 @@
+type Seat{
+    seatNo : String,
+    isOccupied : Boolean
+}
+
+input SeatDto{
+    seatNo : String,
+    isOccupied : Boolean
+}
+
+type Vehicle{
+    vehicleId : ID,
+    route : Route,
+    seats : [Seat],
+    seatCount : Int,
+    price : Float,
+    discount : Float,
+    leavingTime:String,
+    additionalInfo : [String!]
+}
+
+input VehicleDto{
+    routeId : String,
+    seats : [SeatDto],
+    seatCount : Int,
+    price : Float,
+    discount : Float,
+    leavingTime:String,
+    additionalInfo : [String!]
+}

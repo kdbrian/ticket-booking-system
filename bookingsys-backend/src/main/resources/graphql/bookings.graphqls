@@ -1,0 +1,40 @@
+type Booking{
+    id : ID,
+    client : Client,
+    vehicle : Vehicle,
+    seats : [Seat],
+    isActive : Boolean,
+    bookingDate : String,
+    bookingStatus : BookingStatus,
+    bookingType : BOOKING_TYPE,
+    paymentStatus : PAYMENT_STATUS
+}
+
+input BookingDto {
+    clientId : String,
+    vehicleId : String,
+    seats : [SeatDto],
+    isActive : Boolean,
+    bookingDate : String,
+    bookingStatus : BookingStatus,
+    bookingType : BOOKING_TYPE,
+    paymentStatus : PAYMENT_STATUS
+}
+
+
+enum PAYMENT_STATUS {
+    INCOMPLETE, PENDING, COMPLETE
+}
+
+enum BOOKING_TYPE {
+    ONE_WAY, ROUND_TRIP
+}
+
+enum BookingStatus {
+    CONFIRMED,
+    PENDING,
+    CANCELLED,
+    COMPLETED
+}
+
+

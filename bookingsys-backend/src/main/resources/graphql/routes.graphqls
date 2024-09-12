@@ -1,0 +1,17 @@
+type Route{
+    id : ID,
+    fromLocation : Location,
+    toLocation : Location
+    fromLocationName : String,
+    toLocationName : String,
+    vehicles : [Vehicle]
+}
+
+
+input RouteDto{
+    scheduleId : String,
+    fromLocation : LocationDto,
+    toLocation : LocationDto,
+    fromLocationName : String,
+    toLocationName : String
+}
