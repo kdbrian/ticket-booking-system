@@ -1,0 +1,32 @@
+input CompanyDto {
+    fullName : String,
+    email : String,
+    phone : String,
+    location: LocationDto,
+    images : [String],
+    locationArea : String
+}
+
+type Company {
+    id : ID,
+    fullName : String,
+    email : String,
+    phone : String,
+    dateJoined : String,
+    images:[String],
+    isActive:Boolean,
+    locationArea:String,
+    location : Location,
+
+}
+
+input LocationDto {
+    latitude : Float,
+    longitude : Float
+}
+
+type Location {
+    latitude : Float,
+    longitude : Float
+}
+

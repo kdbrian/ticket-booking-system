@@ -1,0 +1,13 @@
+type Schedule{
+    id : ID,
+    routes : [Route],
+    phone : String
+}
+
+input ScheduleDto{
+    routes : [RouteDto],
+    phone : String,
+    scheduleId : String,
+    companyId : String
+}
+
