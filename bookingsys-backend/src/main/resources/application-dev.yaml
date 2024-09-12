@@ -1,0 +1,31 @@
+server:
+  port: 9091
+  servlet:
+    context-path: /bookerapi
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/bookingdb2
+      database: bookingdb2
+
+
+  graphql:
+#    servlet:
+#      enabled: true
+#    playground:
+#      enabled: true
+    graphiql:
+      enabled: true
+
+
+# Optional: Enable logging for MongoDB queries
+logging:
+  level:
+    org:
+      springframework:
+        data:
+
+
+
+
