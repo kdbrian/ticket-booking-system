@@ -1,28 +1,29 @@
 # query definitions
 type Query{
     # companies
-    getCompanies : [Company]
+    getCompanies : [Company!]
+    getCompanyById(id : ID) : Company!
 
     # clients
-    getAllClients : [Client]
-    getClientById(id : ID) : Client
+    getAllClients : [Client!]
+    getClientById(id : ID) : Client!
 
     #routes
-    getAllRoutes : [Route]
-    getRouteById(id : ID) : Route
+    getAllRoutes : [Route!]
+    getRouteById(id : ID) : Route!
 
     #schedule
-    getAllSchedules : [Schedule]
+    getAllSchedules : [Schedule!]
     getScheduleById(id : ID) : Schedule!
 
     #vehicles
-    getVehicleById(id : ID) : Vehicle
-    getAllVehicles : [Vehicle]
-    getVehiclesByRoute(routeId : String) : [Vehicle]
+    getVehicleById(id : ID) : Vehicle!
+    getAllVehicles : [Vehicle!]
+    getVehiclesByRoute(routeId : String) : [Vehicle!]
 
     #bookings
-    getBookingById(id : ID) : Booking
-    getAllBookings : [Booking]
+    getBookingById(id : ID) : Booking!
+    getAllBookings : [Booking!]
 }
 
 # mutations
@@ -32,7 +33,7 @@ type Mutation {
     addClient(dto : ClientDto) : Client
 
     #company
-    createCompany(dto : CompanyDto): Company
+    createCompany(dto : CompanyDto): Company!
     deleteCompany(id : String) : Boolean
 
     #schedules

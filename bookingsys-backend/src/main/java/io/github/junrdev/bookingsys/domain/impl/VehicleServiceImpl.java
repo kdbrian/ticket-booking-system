@@ -59,8 +59,6 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public List<Vehicle> getAllVehicles() {
         return vehicleRepository.findAll();
-//                .stream().map(vehicleMappers::toDto)
-//                .toList();
     }
 
     @Override
