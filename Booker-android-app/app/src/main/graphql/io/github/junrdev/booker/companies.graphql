@@ -1,0 +1,37 @@
+query FetchCompanies{
+    getCompanies {
+        id
+        fullName
+        email
+        images
+        isActive
+        dateJoined
+    }
+}
+
+query FetchCompanyById($id : ID){
+    getCompanyById(id : $id) {
+        id
+        images
+        fullName
+        location {
+            longitude
+            latitude
+        }
+        email
+        locationArea
+        phone
+    }
+}
+
+mutation AddCompany($dto : CompanyDto!) {
+    createCompany(dto: $dto){
+        id
+        fullName
+        email
+        images
+        isActive
+        dateJoined
+        phone
+    }
+}

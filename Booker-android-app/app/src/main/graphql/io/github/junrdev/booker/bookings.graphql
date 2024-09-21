@@ -1,0 +1,25 @@
+query GetBookings{
+
+    getAllBookings {
+        id
+        bookingStatus
+        bookingDate
+        bookingType
+        paymentStatus
+        seats {
+            isOccupied
+            seatNo
+        }
+        vehicle {
+            route {
+                fromLocationName
+                toLocationName
+            }
+            additionalInfo
+            seats {
+                seatNo
+                isOccupied
+            }
+        }
+    }
+}

@@ -1,0 +1,45 @@
+query FetchVehicles{
+
+    getAllVehicles {
+        vehicleId
+        price
+        seatCount
+        additionalInfo
+        seats {
+            seatNo
+            isOccupied
+        }
+        leavingTime
+    }
+}
+
+query FetchVehicleById($id : ID){
+
+    getVehicleById(id: $id){
+        vehicleId
+        price
+        seatCount
+        additionalInfo
+        seats {
+            seatNo
+            isOccupied
+        }
+        leavingTime
+    }
+
+}
+
+query FetchVehiclesByRoute($routeId : String){
+
+    getVehiclesByRoute(routeId: $routeId){
+        vehicleId
+        price
+        seatCount
+        additionalInfo
+        seats {
+            seatNo
+            isOccupied
+        }
+        leavingTime
+    }
+}

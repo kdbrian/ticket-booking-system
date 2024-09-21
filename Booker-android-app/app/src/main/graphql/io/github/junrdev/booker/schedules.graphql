@@ -1,0 +1,42 @@
+query FetchSchedules{
+
+    getAllSchedules {
+        id
+        phone
+        routes {
+            id
+            fromLocationName
+            toLocationName
+            vehicles {
+                seats {
+                    seatNo
+                    isOccupied
+                }
+                price
+                seatCount
+                vehicleId
+            }
+        }
+    }
+}
+
+query FetchScheduleById($id:ID){
+    getScheduleById(id: $id){
+        id
+        phone
+        routes {
+            id
+            fromLocationName
+            toLocationName
+            vehicles {
+                seats {
+                    seatNo
+                    isOccupied
+                }
+                price
+                seatCount
+                vehicleId
+            }
+        }
+    }
+}

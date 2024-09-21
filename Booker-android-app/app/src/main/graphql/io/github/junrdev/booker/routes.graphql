@@ -1,0 +1,34 @@
+query GetAllRoutes{
+
+    getAllRoutes {
+        id
+        fromLocationName
+        toLocationName
+        vehicles {
+            seats {
+                seatNo
+                isOccupied
+            }
+            price
+            seatCount
+            vehicleId
+        }
+    }
+}
+
+query GetRouteById($id : ID){
+    getRouteById(id: $id){
+        id
+        fromLocationName
+        toLocationName
+        vehicles {
+            seats {
+                seatNo
+                isOccupied
+            }
+            price
+            seatCount
+            vehicleId
+        }
+    }
+}
