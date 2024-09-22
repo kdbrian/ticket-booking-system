@@ -16,7 +16,7 @@ query GetAllRoutes{
     }
 }
 
-query GetRouteById($id : ID){
+query GetRouteById($id : ID!){
     getRouteById(id: $id){
         id
         fromLocationName
@@ -31,4 +31,19 @@ query GetRouteById($id : ID){
             vehicleId
         }
     }
+}
+
+mutation SaveRoutes($dto : RouteDto!) {
+
+    saveRoute(dto: $dto){
+        id
+        vehicles {
+            vehicleId
+            price
+            seatCount
+        }
+        fromLocationName
+        toLocationName
+    }
+
 }

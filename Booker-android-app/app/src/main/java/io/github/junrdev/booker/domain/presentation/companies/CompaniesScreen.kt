@@ -9,10 +9,9 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import io.github.junrdev.booker.R
 import io.github.junrdev.booker.databinding.FragmentCompaniesScreenBinding
 import io.github.junrdev.booker.domain.presentation.companies.adapter.CompanyListAdapter
-import kotlinx.coroutines.flow.collect
+import io.github.junrdev.booker.domain.presentation.companies.viewmodel.CompaniesViewModel
 import kotlinx.coroutines.launch
 
 class CompaniesScreen : Fragment() {

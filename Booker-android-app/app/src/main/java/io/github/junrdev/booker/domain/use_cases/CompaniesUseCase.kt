@@ -1,7 +1,6 @@
 package io.github.junrdev.booker.domain.use_cases
 
-import io.github.junrdev.booker.ResponseWrapper
-import io.github.junrdev.booker.data.repo.CompaniesRepoImpl
+import io.github.junrdev.booker.util.ResponseWrapper
 import io.github.junrdev.booker.domain.Provider
 import io.github.junrdev.booker.domain.repo.CompaniesRepo
 import kotlinx.coroutines.Dispatchers

@@ -1,4 +1,4 @@
-package io.github.junrdev.booker
+package io.github.junrdev.booker.util
 
 sealed class ResponseWrapper<T>(
     val data: T? = null,

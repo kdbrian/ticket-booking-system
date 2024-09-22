@@ -1,8 +1,8 @@
-package io.github.junrdev.booker.domain.presentation.companies
+package io.github.junrdev.booker.domain.presentation.companies.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.github.junrdev.booker.ResponseWrapper
+import io.github.junrdev.booker.util.ResponseWrapper
 import io.github.junrdev.booker.domain.Provider
 import io.github.junrdev.booker.domain.use_cases.CompaniesUseCase
 import kotlinx.coroutines.flow.MutableStateFlow

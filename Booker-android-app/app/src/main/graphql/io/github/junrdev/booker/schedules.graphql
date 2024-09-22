@@ -18,6 +18,7 @@ query FetchSchedules{
             }
         }
     }
+
 }
 
 query FetchScheduleById($id:ID){
