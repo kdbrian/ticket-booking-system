@@ -7,7 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,16 +21,5 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val nextScreen = Intent(this, MainActivity2::class.java)
-
-        findViewById<Button>(R.id.button).setOnClickListener {
-            nextScreen.putExtra("action", "companies")
-            startActivity(nextScreen)
-        }
-
-        findViewById<Button>(R.id.button2).setOnClickListener {
-            nextScreen.putExtra("action", "routes")
-            startActivity(nextScreen)
-        }
     }
 }

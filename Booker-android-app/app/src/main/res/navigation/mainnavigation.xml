@@ -3,11 +3,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainnavigation"
-    app:startDestination="@id/companiesScreen">
+    app:startDestination="@id/homeScreen">
 
     <fragment
         android:id="@+id/companiesScreen"
         tools:layout="@layout/fragment_companies_screen"
         android:name="io.github.junrdev.booker.domain.presentation.companies.CompaniesScreen"
-        android:label="CompaniesScreen" />
+        android:label="CompaniesScreen" >
+        <action
+            android:id="@+id/action_companiesScreen_to_viewBookTicket"
+            app:destination="@id/viewBookTicket" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeScreen"
+        android:name="io.github.junrdev.booker.presentation.ui.screens.HomeScreen"
+        android:label="fragment_home_screen"
+        tools:layout="@layout/fragment_home_screen" >
+        <action
+            android:id="@+id/action_homeScreen_to_searchResults"
+            app:destination="@id/searchResults" />
+        <action
+            android:id="@+id/action_homeScreen_to_companiesScreen"
+            app:destination="@id/companiesScreen" />
+        <action
+            android:id="@+id/action_homeScreen_to_companiesScreen2"
+            app:destination="@id/companiesScreen" />
+        <action
+            android:id="@+id/action_homeScreen_to_viewBookTicket"
+            app:destination="@id/viewBookTicket" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchResults"
+        android:name="io.github.junrdev.booker.presentation.ui.screens.SearchResults"
+        android:label="fragment_search_results"
+        tools:layout="@layout/fragment_search_results" >
+        <action
+            android:id="@+id/action_searchResults_to_viewBookTicket"
+            app:destination="@id/viewBookTicket" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewBookTicket"
+        android:name="io.github.junrdev.booker.ViewBookTicket"
+        android:label="fragment_view_book_ticket"
+        tools:layout="@layout/fragment_view_book_ticket" />
 </navigation>
