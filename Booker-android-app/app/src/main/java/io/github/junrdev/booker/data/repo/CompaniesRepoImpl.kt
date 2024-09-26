@@ -1,13 +1,13 @@
 package io.github.junrdev.booker.data.repo
 
 import com.apollographql.apollo.ApolloClient
-import io.github.junrdev.booker.domain.Provider
 import io.github.junrdev.booker.domain.repo.CompaniesRepo
 import src.main.graphql.FetchCompaniesQuery
 import src.main.graphql.FetchCompanyByIdQuery
+import javax.inject.Inject
 
-class CompaniesRepoImpl(
-    private val apolloClient: ApolloClient = Provider.provideApolloClient()
+class CompaniesRepoImpl @Inject constructor(
+    private val apolloClient: ApolloClient
 ) : CompaniesRepo {
 
     override suspend fun getCompanies(): Result<FetchCompaniesQuery.Data> {

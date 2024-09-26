@@ -1,8 +1,7 @@
 package io.github.junrdev.booker.domain.use_cases
 
-import io.github.junrdev.booker.util.ResponseWrapper
-import io.github.junrdev.booker.domain.Provider
 import io.github.junrdev.booker.domain.repo.CompaniesRepo
+import io.github.junrdev.booker.util.ResponseWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -10,9 +9,10 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import src.main.graphql.FetchCompaniesQuery
 import src.main.graphql.FetchCompanyByIdQuery
+import javax.inject.Inject
 
-class CompaniesUseCase(
-    private val companiesRepo: CompaniesRepo = Provider.provideCompaniesRepo()
+class CompaniesUseCase @Inject constructor(
+    private val companiesRepo: CompaniesRepo
 ) {
 
     fun getCompanies(): Flow<ResponseWrapper<FetchCompaniesQuery.Data>> = flow {
