@@ -1,4 +1,4 @@
-package io.github.junrdev.booker.domain.presentation.companies.adapter
+package io.github.junrdev.booker.presentation.companies.adapter
 
 import android.view.LayoutInflater
 import android.view.View

@@ -1,4 +1,4 @@
-package io.github.junrdev.booker.domain.presentation.companies
+package io.github.junrdev.booker.presentation.companies
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import io.github.junrdev.booker.databinding.FragmentCompaniesScreenBinding
-import io.github.junrdev.booker.domain.presentation.companies.adapter.CompanyListAdapter
-import io.github.junrdev.booker.domain.presentation.companies.viewmodel.CompaniesViewModel
+import io.github.junrdev.booker.presentation.companies.adapter.CompanyListAdapter
+import io.github.junrdev.booker.presentation.companies.viewmodel.CompaniesViewModel
 import kotlinx.coroutines.launch
 
 class CompaniesScreen : Fragment() {

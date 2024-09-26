@@ -1,4 +1,4 @@
-package io.github.junrdev.booker.domain.presentation.routes
+package io.github.junrdev.booker.presentation.routes
 
 import android.view.LayoutInflater
 import android.view.View

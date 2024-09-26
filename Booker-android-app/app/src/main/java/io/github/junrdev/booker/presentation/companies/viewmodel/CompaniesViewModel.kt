@@ -1,4 +1,4 @@
-package io.github.junrdev.booker.domain.presentation.companies.viewmodel
+package io.github.junrdev.booker.presentation.companies.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

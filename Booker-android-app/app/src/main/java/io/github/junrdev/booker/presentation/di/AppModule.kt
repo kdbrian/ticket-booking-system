@@ -1,4 +1,4 @@
-package io.github.junrdev.booker.di
+package io.github.junrdev.booker.presentation.di
 
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.network.okHttpClient

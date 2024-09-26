@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import dagger.hilt.android.AndroidEntryPoint
-import io.github.junrdev.booker.domain.presentation.companies.CompaniesScreen
-import io.github.junrdev.booker.domain.presentation.routes.RouteScreen
+import io.github.junrdev.booker.presentation.companies.CompaniesScreen
+import io.github.junrdev.booker.presentation.routes.RouteScreen
 
 @AndroidEntryPoint
 class MainActivity2 : AppCompatActivity() {
