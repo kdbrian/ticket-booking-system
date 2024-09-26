@@ -133,7 +133,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="8dp"
-                        android:background="@drawable/roundedshaped12dp"
+                        android:background="@drawable/roundedshapedstroked12dp"
                         android:orientation="horizontal">
 
                         <EditText
@@ -184,7 +184,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:background="@drawable/roundedshaped12dp" />
+                                android:background="@drawable/roundedshapedstroked12dp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -207,7 +207,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:background="@drawable/roundedshaped12dp" />
+                                android:background="@drawable/roundedshapedstroked12dp" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -259,6 +259,42 @@
                 android:padding="12dp"
                 tools:itemCount="2"
                 tools:listitem="@layout/companypreview" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/textView32"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ubuntubold"
+                    android:text="Recent Activity"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:fontFamily="@font/ubuntubold"
+                    android:text="See All"
+                    android:textColor="@color/black_overlay"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/recentactivityitem" />
         </LinearLayout>
     </ScrollView>
 

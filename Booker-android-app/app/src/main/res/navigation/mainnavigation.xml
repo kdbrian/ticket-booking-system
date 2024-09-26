@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/companiesScreen"
         tools:layout="@layout/fragment_companies_screen"
-        android:name="io.github.junrdev.booker.domain.presentation.companies.CompaniesScreen"
+        android:name="io.github.junrdev.booker.presentation.companies.CompaniesScreen"
         android:label="CompaniesScreen" >
         <action
             android:id="@+id/action_companiesScreen_to_viewBookTicket"
@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_homeScreen_to_viewBookTicket"
             app:destination="@id/viewBookTicket" />
+        <action
+            android:id="@+id/action_homeScreen_to_routeScreen"
+            app:destination="@id/routeScreen" />
     </fragment>
     <fragment
         android:id="@+id/searchResults"
@@ -43,7 +46,12 @@
     </fragment>
     <fragment
         android:id="@+id/viewBookTicket"
-        android:name="io.github.junrdev.booker.ViewBookTicket"
+        android:name="io.github.junrdev.booker.presentation.ui.screens.ViewBookTicket"
         android:label="fragment_view_book_ticket"
         tools:layout="@layout/fragment_view_book_ticket" />
+    <fragment
+        android:id="@+id/routeScreen"
+        android:name="io.github.junrdev.booker.presentation.routes.RouteScreen"
+        android:label="fragment_route_screen"
+        tools:layout="@layout/fragment_route_screen" />
 </navigation>
