@@ -21,7 +21,7 @@ query FetchSchedules{
 
 }
 
-query FetchScheduleById($id:ID){
+query FetchScheduleById($id:ID!){
     getScheduleById(id: $id){
         id
         phone

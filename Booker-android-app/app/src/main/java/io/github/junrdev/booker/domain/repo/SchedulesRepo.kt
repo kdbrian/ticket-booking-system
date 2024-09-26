@@ -5,8 +5,8 @@ import src.main.graphql.FetchSchedulesQuery
 
 interface SchedulesRepo {
 
-    suspend fun getSchedules() : FetchSchedulesQuery.Data
+    suspend fun getSchedules() : Result<FetchSchedulesQuery.Data>
 
-    suspend fun getScheduleById() : FetchScheduleByIdQuery.Data
+    suspend fun getScheduleById(id : String) : Result<FetchScheduleByIdQuery.Data>
 
 }
