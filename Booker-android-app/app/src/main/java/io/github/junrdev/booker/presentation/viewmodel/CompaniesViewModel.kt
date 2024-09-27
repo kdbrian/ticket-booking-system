@@ -1,10 +1,11 @@
-package io.github.junrdev.booker.presentation.companies.viewmodel
+package io.github.junrdev.booker.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.github.junrdev.booker.util.ResponseWrapper
-import io.github.junrdev.booker.domain.Provider
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.junrdev.booker.domain.use_cases.CompaniesUseCase
+import io.github.junrdev.booker.data.util.ResponseWrapper
+import io.github.junrdev.booker.presentation.ui.util.UiStateWrapper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,14 +13,16 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import src.main.graphql.FetchCompaniesQuery
+import javax.inject.Inject
 
-class CompaniesViewModel(
-    private val companiesUseCase: CompaniesUseCase = Provider.provideCompaniesUseCase()
+@HiltViewModel
+class CompaniesViewModel @Inject constructor(
+    private val companiesUseCase: CompaniesUseCase
 ) : ViewModel() {
 
     private val _allCompaniesUiState =
-        MutableStateFlow(CompaniesScreenState.UiState1<FetchCompaniesQuery.Data>())
-    val allCompaniesUiState: StateFlow<CompaniesScreenState.UiState1<FetchCompaniesQuery.Data>> =
+        MutableStateFlow(UiStateWrapper<FetchCompaniesQuery.Data>())
+    val allCompaniesUiState: StateFlow<UiStateWrapper<FetchCompaniesQuery.Data>> =
         _allCompaniesUiState.asStateFlow()
 
 
@@ -31,19 +34,19 @@ class CompaniesViewModel(
         .onEach { emition ->
             when (emition) {
                 is ResponseWrapper.Error -> _allCompaniesUiState.update {
-                    CompaniesScreenState.UiState1(
+                    UiStateWrapper(
                         error = emition.message.toString()
                     )
                 }
 
                 is ResponseWrapper.Loading -> _allCompaniesUiState.update {
-                    CompaniesScreenState.UiState1(
+                    UiStateWrapper(
                         isLoading = true
                     )
                 }
 
                 is ResponseWrapper.Success -> _allCompaniesUiState.update {
-                    CompaniesScreenState.UiState1(
+                    UiStateWrapper(
                         data = emition.data
                     )
                 }
@@ -52,17 +55,5 @@ class CompaniesViewModel(
 }
 
 object CompaniesScreenState {
-
-    data class UiState1<T>(
-        val isLoading: Boolean = false,
-        val error: String = "",
-        val data: T? = null
-    )
-
-    data class UiState(
-        val isLoading: Boolean = false,
-        val error: String = "",
-        val data: FetchCompaniesQuery.Data? = null
-    )
 
 }

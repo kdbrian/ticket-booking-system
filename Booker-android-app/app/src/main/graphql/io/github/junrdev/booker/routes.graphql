@@ -5,6 +5,7 @@ query GetAllRoutes{
         fromLocationName
         toLocationName
         vehicles {
+            leavingTime
             seats {
                 seatNo
                 isOccupied

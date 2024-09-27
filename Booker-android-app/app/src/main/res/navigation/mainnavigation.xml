@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/companiesScreen"
         tools:layout="@layout/fragment_companies_screen"
-        android:name="io.github.junrdev.booker.presentation.companies.CompaniesScreen"
+        android:name="io.github.junrdev.booker.presentation.ui.screens.CompaniesScreen"
         android:label="CompaniesScreen" >
         <action
             android:id="@+id/action_companiesScreen_to_viewBookTicket"
@@ -51,7 +51,7 @@
         tools:layout="@layout/fragment_view_book_ticket" />
     <fragment
         android:id="@+id/routeScreen"
-        android:name="io.github.junrdev.booker.presentation.routes.RouteScreen"
+        android:name="io.github.junrdev.booker.presentation.ui.screens.RouteScreen"
         android:label="fragment_route_screen"
         tools:layout="@layout/fragment_route_screen" />
 </navigation>

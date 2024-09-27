@@ -1,4 +1,4 @@
-query FetchVehicles{
+ query FetchVehicles{
 
     getAllVehicles {
         vehicleId

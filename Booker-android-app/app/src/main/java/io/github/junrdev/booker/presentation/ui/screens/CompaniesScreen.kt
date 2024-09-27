@@ -1,4 +1,4 @@
-package io.github.junrdev.booker.presentation.companies
+package io.github.junrdev.booker.presentation.ui.screens
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,17 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import dagger.hilt.android.AndroidEntryPoint
 import io.github.junrdev.booker.databinding.FragmentCompaniesScreenBinding
-import io.github.junrdev.booker.presentation.companies.adapter.CompanyListAdapter
-import io.github.junrdev.booker.presentation.companies.viewmodel.CompaniesViewModel
+import io.github.junrdev.booker.presentation.adapter.CompanyListAdapter
+import io.github.junrdev.booker.presentation.viewmodel.CompaniesViewModel
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class CompaniesScreen : Fragment() {
     lateinit var binding: FragmentCompaniesScreenBinding
-    lateinit var companiesViewModel: CompaniesViewModel
+    private val companiesViewModel by viewModels<CompaniesViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,11 +29,6 @@ class CompaniesScreen : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ViewModelProvider(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return CompaniesViewModel() as T
-            }
-        })[CompaniesViewModel::class].also { companiesViewModel = it }
 
         lifecycleScope.launch {
             companiesViewModel.allCompaniesUiState.collect { state ->
@@ -42,7 +38,7 @@ class CompaniesScreen : Fragment() {
                 }
 
                 if (state.data != null) {
-                    binding.companyList.adapter = CompanyListAdapter(state.data.getCompanies!!)
+                    binding.companyList.adapter = CompanyListAdapter(state.data)
                 }
 
                 if (state.error != null) {

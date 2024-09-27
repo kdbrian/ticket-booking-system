@@ -1,4 +1,4 @@
-package io.github.junrdev.booker.presentation.routes
+package io.github.junrdev.booker.presentation.ui.screens
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.junrdev.booker.databinding.FragmentRouteScreenBinding
 import io.github.junrdev.booker.domain.use_cases.RoutesUseCase
-import io.github.junrdev.booker.util.ResponseWrapper
+import io.github.junrdev.booker.data.util.ResponseWrapper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -54,7 +54,7 @@ class RouteScreen : Fragment() {
 
                     is ResponseWrapper.Success -> {
                         it.data?.let { lst ->
-                            binding.routeList.adapter = RouteListAdapter(lst)
+//                            binding.routeList.adapter = RouteListAdapter(lst)
                         }
 
                     }
