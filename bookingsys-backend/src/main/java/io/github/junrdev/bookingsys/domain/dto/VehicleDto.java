@@ -15,10 +15,14 @@ public class VehicleDto {
     private List<Seat> seats = new ArrayList<>();
     private List<String> additionalInfo = new ArrayList<>();
 
+    private String vehicleName;
+
+    private Long timeOfTravel;
+
     public VehicleDto() {
     }
 
-    public VehicleDto(String vehicleId, String routeId, Double price, Double discount, Long leavingTime, Long seatCount, List<Seat> seats, List<String> additionalInfo) {
+    public VehicleDto(String vehicleId, String routeId, Double price, Double discount, Long leavingTime, Long seatCount, List<Seat> seats, List<String> additionalInfo, String vehicleName, Long timeOfTravel) {
         this.vehicleId = vehicleId;
         this.routeId = routeId;
         this.price = price;
@@ -27,6 +31,8 @@ public class VehicleDto {
         this.seatCount = seatCount;
         this.seats = seats;
         this.additionalInfo = additionalInfo;
+        this.vehicleName = vehicleName;
+        this.timeOfTravel = timeOfTravel;
     }
 
     public String getVehicleId() {
@@ -104,6 +110,8 @@ public class VehicleDto {
                 ", seatCount=" + seatCount +
                 ", seats=" + seats +
                 ", additionalInfo=" + additionalInfo +
+                ", vehicleName='" + vehicleName + '\'' +
+                ", timeOfTravel=" + timeOfTravel +
                 '}';
     }
 }
