@@ -98,6 +98,7 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
 
+    implementation(libs.androidx.swiperefreshlayout)
 }
 
 kapt {

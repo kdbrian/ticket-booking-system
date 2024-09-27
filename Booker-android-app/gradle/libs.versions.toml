@@ -20,6 +20,7 @@ roomRuntime = "2.6.1"
 secretsGradlePlugin = "2.0.1"
 navigationFragmentKtx = "2.8.0"
 navigationUiKtx = "2.8.0"
+swiperefreshlayout = "1.1.0"
 timber = "5.0.1"
 
 [libraries]
@@ -29,6 +30,7 @@ androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtim
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
 apollo-runtime = { module = "com.apollographql.apollo:apollo-runtime", version.ref = "apolloRuntime" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidCompiler" }
