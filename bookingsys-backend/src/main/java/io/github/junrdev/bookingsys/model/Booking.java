@@ -26,6 +26,8 @@ public class Booking {
 
     private LocalDateTime bookingDate;
 
+    private Double totalPrice;
+
     private BookingStatus bookingStatus;
     private BOOKING_TYPE bookingType;
     private PAYMENT_STATUS paymentStatus;
@@ -134,6 +136,14 @@ public class Booking {
         this.seats = seats;
     }
 
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
     @Override
     public String toString() {
         return "Booking{" +
@@ -143,6 +153,7 @@ public class Booking {
                 ", seats=" + seats +
                 ", isActive=" + isActive +
                 ", bookingDate=" + bookingDate +
+                ", totalPrice=" + totalPrice +
                 ", bookingStatus=" + bookingStatus +
                 ", bookingType=" + bookingType +
                 ", paymentStatus=" + paymentStatus +

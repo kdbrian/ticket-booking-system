@@ -2,7 +2,6 @@ package io.github.junrdev.bookingsys.domain.dto;
 
 import io.github.junrdev.bookingsys.model.Seat;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,7 @@ public class VehicleDto {
     private String routeId;
     private Double price;
     private Double discount;
-    private LocalTime leavingTime = LocalTime.now();
+    private Long leavingTime;
     private Long seatCount;
     private List<Seat> seats = new ArrayList<>();
     private List<String> additionalInfo = new ArrayList<>();
@@ -19,7 +18,7 @@ public class VehicleDto {
     public VehicleDto() {
     }
 
-    public VehicleDto(String vehicleId, String routeId, Double price, Double discount, LocalTime leavingTime, Long seatCount, List<Seat> seats, List<String> additionalInfo) {
+    public VehicleDto(String vehicleId, String routeId, Double price, Double discount, Long leavingTime, Long seatCount, List<Seat> seats, List<String> additionalInfo) {
         this.vehicleId = vehicleId;
         this.routeId = routeId;
         this.price = price;
@@ -62,11 +61,11 @@ public class VehicleDto {
         this.discount = discount;
     }
 
-    public LocalTime getLeavingTime() {
+    public Long getLeavingTime() {
         return leavingTime;
     }
 
-    public void setLeavingTime(LocalTime leavingTime) {
+    public void setLeavingTime(Long leavingTime) {
         this.leavingTime = leavingTime;
     }
 

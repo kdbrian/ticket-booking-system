@@ -25,6 +25,8 @@ public class Client {
 
     private Location location;
 
+    private String locationName;
+
     private Boolean isActive;
 
     private CLIENT_TYPE clientType;
@@ -47,7 +49,7 @@ public class Client {
         this.dateJoined = LocalDate.now();
     }
 
-    public Client(String id, String fullName, String identification, Kyc kyc, LocalDate dateJoined, String email, String phone, Location location, Boolean isActive, CLIENT_TYPE clientType) {
+    public Client(String id, String fullName, String identification, Kyc kyc, LocalDate dateJoined, String email, String phone, Location location, String locationName, Boolean isActive, CLIENT_TYPE clientType) {
         this.id = id;
         this.fullName = fullName;
         this.identification = identification;
@@ -56,11 +58,12 @@ public class Client {
         this.email = email;
         this.phone = phone;
         this.location = location;
+        this.locationName = locationName;
         this.isActive = isActive;
         this.clientType = clientType;
     }
 
-    public Client(String fullName, String identification, Kyc kyc, LocalDate dateJoined, String email, String phone, Location location, Boolean isActive) {
+    public Client(String fullName, String identification, Kyc kyc, LocalDate dateJoined, String email, String phone, Location location, String locationName, Boolean isActive, CLIENT_TYPE clientType) {
         this.fullName = fullName;
         this.identification = identification;
         this.kyc = kyc;
@@ -68,7 +71,9 @@ public class Client {
         this.email = email;
         this.phone = phone;
         this.location = location;
+        this.locationName = locationName;
         this.isActive = isActive;
+        this.clientType = clientType;
     }
 
     public String getId() {
@@ -143,10 +148,18 @@ public class Client {
         isActive = active;
     }
 
+    public String getLocationName() {
+        return locationName;
+    }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
+    }
+
     @Override
     public String toString() {
         return "Client{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", identification='" + identification + '\'' +
                 ", kyc=" + kyc +
@@ -154,7 +167,9 @@ public class Client {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", location=" + location +
+                ", locationName='" + locationName + '\'' +
                 ", isActive=" + isActive +
+                ", clientType=" + clientType +
                 '}';
     }
 }

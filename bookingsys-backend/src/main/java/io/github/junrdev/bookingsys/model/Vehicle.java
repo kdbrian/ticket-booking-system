@@ -27,16 +27,19 @@ public class Vehicle {
 
     private Double discount;
 
-    private LocalTime leavingTime;
+    private Long leavingTime;
 
     private List<String> additionalInfo = new ArrayList<>();
 
-    transient private Map<String, Seat> seatMap;
+    //additional fields
+    private String vehicleName;
+
+    private Long timeOfTravel;
 
     public Vehicle() {
     }
 
-    public Vehicle(Route route, List<Seat> seats, Long seatCount, Double price, Double discount, LocalTime leavingTime, List<String> additionalInfo) {
+    public Vehicle(Route route, List<Seat> seats, Long seatCount, Double price, Double discount, Long leavingTime, List<String> additionalInfo, String vehicleName, Long timeOfTravel) {
         this.route = route;
         this.seats = seats;
         this.seatCount = seatCount;
@@ -44,20 +47,8 @@ public class Vehicle {
         this.discount = discount;
         this.leavingTime = leavingTime;
         this.additionalInfo = additionalInfo;
-        if (seats != null)
-            this.seatMap = seats.stream().collect(Collectors.toMap(Seat::getSeatNo, seat -> seat));
-    }
-
-    public Vehicle(String vehicleId, Route route, List<Seat> seats, Long seatCount, Double price, Double discount, LocalTime leavingTime) {
-        this.vehicleId = vehicleId;
-        this.route = route;
-        this.seats = seats;
-        this.seatCount = seatCount;
-        this.price = price;
-        this.discount = discount;
-        this.leavingTime = leavingTime;
-        if (seats != null)
-            this.seatMap = seats.stream().collect(Collectors.toMap(Seat::getSeatNo, seat -> seat));
+        this.vehicleName = vehicleName;
+        this.timeOfTravel = timeOfTravel;
     }
 
     public String getVehicleId() {
@@ -80,10 +71,6 @@ public class Vehicle {
         return seats;
     }
 
-    public void setSeats(List<Seat> seats) {
-        this.seats = seats;
-        this.seatMap = seats.stream().collect(Collectors.toMap(Seat::getSeatNo, seat -> seat));
-    }
 
     public Long getSeatCount() {
         return seatCount;
@@ -109,11 +96,11 @@ public class Vehicle {
         this.discount = discount;
     }
 
-    public LocalTime getLeavingTime() {
+    public Long getLeavingTime() {
         return leavingTime;
     }
 
-    public void setLeavingTime(LocalTime leavingTime) {
+    public void setLeavingTime(Long leavingTime) {
         this.leavingTime = leavingTime;
     }
 
@@ -125,21 +112,24 @@ public class Vehicle {
         this.additionalInfo = additionalInfo;
     }
 
-    public Map<String, Seat> getSeatMap() {
-        return seatMap;
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
     }
 
-    public void setSeatMap(Map<String, Seat> seatMap) {
-        this.seatMap = seatMap;
+    public String getVehicleName() {
+        return vehicleName;
     }
 
-    public void processSeatRequest(List<String> seats) {
-        seats.forEach(requestedSeat -> {
-            Seat seat = seatMap.get(requestedSeat);
-            if (seat != null && !seat.getOccupied()) {
-                seat.occupy();
-            }
-        });
+    public void setVehicleName(String vehicleName) {
+        this.vehicleName = vehicleName;
+    }
+
+    public Long getTimeOfTravel() {
+        return timeOfTravel;
+    }
+
+    public void setTimeOfTravel(Long timeOfTravel) {
+        this.timeOfTravel = timeOfTravel;
     }
 
     @Override
@@ -153,8 +143,10 @@ public class Vehicle {
                 ", discount=" + discount +
                 ", leavingTime=" + leavingTime +
                 ", additionalInfo=" + additionalInfo +
-                ", seatMap=" + seatMap +
+                ", vehicleName='" + vehicleName + '\'' +
+                ", timeOfTravel=" + timeOfTravel +
                 '}';
     }
+
 }
 
