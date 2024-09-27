@@ -17,6 +17,7 @@ type Vehicle{
     discount : Float,
     leavingTime:String,
     additionalInfo : [String!]
+    timeOfTravel : Float
 }
 
 input VehicleDto{
