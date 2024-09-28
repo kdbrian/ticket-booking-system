@@ -5,6 +5,8 @@ import io.github.junrdev.bookingsys.model.Booking;
 import io.github.junrdev.bookingsys.model.Client;
 import io.github.junrdev.bookingsys.model.Seat;
 import io.github.junrdev.bookingsys.model.Vehicle;
+import io.github.junrdev.bookingsys.model.enums.BOOKING_STATUS;
+import io.github.junrdev.bookingsys.model.enums.PAYMENT_STATUS;
 import io.github.junrdev.bookingsys.repository.BookingRepository;
 import io.github.junrdev.bookingsys.repository.ClientRepository;
 import io.github.junrdev.bookingsys.repository.VehicleRepository;
@@ -95,7 +97,7 @@ public class BookingServiceImpl implements BookingService {
         // Set other fields in booking
         booking.setBookingDate(LocalDateTime.now());
         booking.setBookingStatus(dto.getBookingStatus());
-        booking.setPaymentStatus(Booking.PAYMENT_STATUS.PENDING); // Set payment status to pending
+        booking.setPaymentStatus(PAYMENT_STATUS.PENDING); // Set payment status to pending
         booking.setBookingType(dto.getBookingType());
 
         // Save the booking with the newly booked seats
@@ -121,7 +123,27 @@ public class BookingServiceImpl implements BookingService {
                 .map(booking1 -> {
                     if (booking1.getUpdateSlug() != System.currentTimeMillis()) {
                         booking1.setActive(false);
-                        booking1.setBookingStatus(Booking.BookingStatus.CANCELLED);
+                        booking1.setBookingStatus(BOOKING_STATUS.CANCELLED);
+                        booking1.setPaymentStatus(PAYMENT_STATUS.INCOMPLETE);
+
+                        //get vehicle
+                        Vehicle vehicle = vehicleRepository.findById(booking1.getVehicle().getVehicleId())
+                                .orElseThrow(() -> new NotFoundException("Vehicle " + booking1.getVehicle().getVehicleId() + " not found"));
+
+                        List<Seat> vehicleSeats = vehicle.getSeats();
+                        log.info("before {}", vehicleSeats);
+
+                        //find seats
+                        booking1.getSeats().forEach(seat -> {
+                            if (vehicleSeats.contains(seat))
+                                seat.release();
+                        });
+
+                        log.info("after {}", vehicleSeats);
+
+                        //release
+
+
                         booking1.setUpdateSlug(System.currentTimeMillis());
                         return bookingRepository.save(booking1);
                     } else
@@ -136,6 +158,22 @@ public class BookingServiceImpl implements BookingService {
             bookingRepository.deleteById(bookingId);
             return true;
         } else
-                throw new NotFoundException(String.format("Booking %s, not found", bookingId));
+            throw new NotFoundException(String.format("Booking %s, not found", bookingId));
+    }
+
+    @Override
+    public List<Booking> getClientBookings(String clientId) {
+        Client client = clientRepository.findById(clientId)
+                .orElseThrow(() -> new NotFoundException(String.format("Client %s, not found", clientId)));
+
+        return bookingRepository.findByClient(client);
+    }
+
+    @Override
+    public List<Booking> getVehicleBookings(String vehicleId) {
+        Vehicle vehicle = vehicleRepository.findById(vehicleId)
+                .orElseThrow(() -> new NotFoundException(String.format("Vehicle %s, not found", vehicleId)));
+
+        return bookingRepository.findByVehicle(vehicle);
     }
 }

@@ -34,12 +34,28 @@ public class BookingController {
         return new ResponseEntity<>(bookingMapper.toDto(bookingService.saveBooking(dto)), HttpStatus.CREATED);
     }
 
-    @PatchMapping("/{id}/cancel")
+
+    @GetMapping("/mine/{clientId}")
+    public ResponseEntity<List<BookingDto>> getClientsBookings(
+            @PathVariable("clientId") String clientId
+    ) {
+        return ResponseEntity.ok(bookingService.getClientBookings(clientId).stream().map(bookingMapper::toDto).toList());
+    }
+
+
+    @GetMapping("/vehicle/{vehicleId}")
+    public ResponseEntity<List<BookingDto>> getVehicleBookings(
+            @PathVariable("vehicleId") String vehicleId
+    ) {
+        return ResponseEntity.ok(bookingService.getVehicleBookings(vehicleId).stream().map(bookingMapper::toDto).toList());
+    }
+
+    @PatchMapping("/{bookingId}/cancel")
     public ResponseEntity<BookingDto> cancelBooking(@PathVariable String bookingId) {
         return ResponseEntity.ok(bookingMapper.toDto(bookingService.cancelBooking(bookingId)));
     }
 
-    @PatchMapping("/{id}/delete")
+    @PatchMapping("/{bookingId}/delete")
     public ResponseEntity<Void> deleteBooking(@PathVariable String bookingId) {
         bookingService.deleteBooking(bookingId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

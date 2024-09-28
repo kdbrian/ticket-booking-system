@@ -36,6 +36,10 @@ public class Seat {
     public void occupy(){
         this.isOccupied = true;
     }
+
+    public void release(){
+        this.isOccupied = false;
+    }
     @Override
     public String toString() {
         return "Seat{" +

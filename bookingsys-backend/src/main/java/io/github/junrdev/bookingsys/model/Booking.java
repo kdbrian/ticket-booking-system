@@ -1,6 +1,9 @@
 package io.github.junrdev.bookingsys.model;
 
 
+import io.github.junrdev.bookingsys.model.enums.BOOKING_STATUS;
+import io.github.junrdev.bookingsys.model.enums.BOOKING_TYPE;
+import io.github.junrdev.bookingsys.model.enums.PAYMENT_STATUS;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -28,7 +31,7 @@ public class Booking {
 
     private Double totalPrice;
 
-    private BookingStatus bookingStatus;
+    private BOOKING_STATUS bookingStatus;
     private BOOKING_TYPE bookingType;
     private PAYMENT_STATUS paymentStatus;
     private Long updateSlug= System.currentTimeMillis();
@@ -39,22 +42,6 @@ public class Booking {
 
     public void setUpdateSlug(Long updateSlug) {
         this.updateSlug = updateSlug;
-    }
-
-    // Enum for Booking Status
-    public enum BookingStatus {
-        CONFIRMED,
-        PENDING,
-        CANCELLED,
-        COMPLETED
-    }
-
-    public enum BOOKING_TYPE {
-        ONE_WAY, ROUND_TRIP
-    }
-
-    public enum PAYMENT_STATUS {
-        INCOMPLETE, PENDING, COMPLETE
     }
 
     public BOOKING_TYPE getBookingType() {
@@ -120,12 +107,12 @@ public class Booking {
         this.bookingDate = bookingDate;
     }
 
-    public BookingStatus getBookingStatus() {
+    public BOOKING_STATUS getBookingStatus() {
         return bookingStatus;
     }
 
-    public void setBookingStatus(BookingStatus bookingStatus) {
-        this.bookingStatus = bookingStatus;
+    public void setBookingStatus(BOOKING_STATUS BOOKINGSTATUS) {
+        this.bookingStatus = BOOKINGSTATUS;
     }
 
     public List<Seat> getSeats() {

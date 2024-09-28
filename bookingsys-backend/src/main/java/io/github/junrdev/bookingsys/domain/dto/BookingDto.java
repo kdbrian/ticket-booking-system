@@ -1,6 +1,8 @@
 package io.github.junrdev.bookingsys.domain.dto;
 
-import io.github.junrdev.bookingsys.model.Booking;
+import io.github.junrdev.bookingsys.model.enums.BOOKING_STATUS;
+import io.github.junrdev.bookingsys.model.enums.BOOKING_TYPE;
+import io.github.junrdev.bookingsys.model.enums.PAYMENT_STATUS;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,14 +17,14 @@ public class BookingDto {
     private List<SeatDto> seats;
 
     private LocalDate bookingDate = LocalDate.now();
-    private Booking.BookingStatus bookingStatus = Booking.BookingStatus.PENDING;
-    private Booking.PAYMENT_STATUS paymentStatus = Booking.PAYMENT_STATUS.PENDING;
-    private Booking.BOOKING_TYPE bookingType = Booking.BOOKING_TYPE.ONE_WAY;
+    private BOOKING_STATUS bookingStatus = BOOKING_STATUS.PENDING;
+    private PAYMENT_STATUS paymentStatus = PAYMENT_STATUS.PENDING;
+    private BOOKING_TYPE bookingType = BOOKING_TYPE.ONE_WAY;
 
     public BookingDto() {
     }
 
-    public BookingDto(String id, String clientId, String vehicleId, List<SeatDto> seats, LocalDate bookingDate, Booking.BookingStatus bookingStatus, Booking.PAYMENT_STATUS paymentStatus, Booking.BOOKING_TYPE bookingType) {
+    public BookingDto(String id, String clientId, String vehicleId, List<SeatDto> seats, LocalDate bookingDate, BOOKING_STATUS bookingStatus, PAYMENT_STATUS paymentStatus, BOOKING_TYPE bookingType) {
         this.id = id;
         this.clientId = clientId;
         this.vehicleId = vehicleId;
@@ -33,7 +35,7 @@ public class BookingDto {
         this.bookingType = bookingType;
     }
 
-    public BookingDto(String clientId, String vehicleId, List<SeatDto> seats, LocalDate bookingDate, Booking.BookingStatus bookingStatus, Booking.PAYMENT_STATUS paymentStatus, Booking.BOOKING_TYPE bookingType) {
+    public BookingDto(String clientId, String vehicleId, List<SeatDto> seats, LocalDate bookingDate, BOOKING_STATUS bookingStatus, PAYMENT_STATUS paymentStatus, BOOKING_TYPE bookingType) {
         this.clientId = clientId;
         this.vehicleId = vehicleId;
         this.seats = seats;
@@ -83,19 +85,19 @@ public class BookingDto {
         this.bookingDate = bookingDate;
     }
 
-    public Booking.BookingStatus getBookingStatus() {
+    public BOOKING_STATUS getBookingStatus() {
         return bookingStatus;
     }
 
-    public void setBookingStatus(Booking.BookingStatus bookingStatus) {
-        this.bookingStatus = bookingStatus;
+    public void setBookingStatus(BOOKING_STATUS BOOKINGSTATUS) {
+        this.bookingStatus = BOOKINGSTATUS;
     }
 
-    public Booking.BOOKING_TYPE getBookingType() {
+    public BOOKING_TYPE getBookingType() {
         return bookingType;
     }
 
-    public void setBookingType(Booking.BOOKING_TYPE bookingType) {
+    public void setBookingType(BOOKING_TYPE bookingType) {
         this.bookingType = bookingType;
     }
 

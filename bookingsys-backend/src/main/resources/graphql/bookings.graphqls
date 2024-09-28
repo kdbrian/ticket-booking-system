@@ -5,7 +5,7 @@ type Booking{
     seats : [Seat],
     isActive : Boolean,
     bookingDate : String,
-    bookingStatus : BookingStatus,
+    BOOKINGSTATUS : BookingStatus,
     bookingType : BOOKING_TYPE,
     paymentStatus : PAYMENT_STATUS
 }
@@ -16,7 +16,7 @@ input BookingDto {
     seats : [SeatDto],
     isActive : Boolean,
     bookingDate : String,
-    bookingStatus : BookingStatus,
+    BOOKINGSTATUS : BookingStatus,
     bookingType : BOOKING_TYPE,
     paymentStatus : PAYMENT_STATUS
 }
