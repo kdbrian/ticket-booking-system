@@ -35,7 +35,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public Company saveCompany(CompanyDto companyDto) {
         Company company = companyMapper.companyDToCompany(companyDto);
-        County county = countyRepository.findByCountyName(companyDto.countyName())
+        County county = countyRepository.findByCountyNameContains(companyDto.countyName())
                 .orElseThrow(() -> new NotFoundException("County " + companyDto.countyName() + " Not found."));
         SubCounty subCounty = subCountyRepository.findBySubCountyName(companyDto.subCountyName())
                 .orElseThrow(() -> new NotFoundException("sub-county " + companyDto.countyName() + " Not found."));

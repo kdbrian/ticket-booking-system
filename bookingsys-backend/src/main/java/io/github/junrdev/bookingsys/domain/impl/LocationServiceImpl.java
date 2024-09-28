@@ -43,6 +43,6 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public List<SubCounty> getSubCountiesByCountyName(String countyName) {
-        return subCountyRepository.findByCountyName(countyName);
+        return subCountyRepository.findByCountyNameContains(countyName);
     }
 }

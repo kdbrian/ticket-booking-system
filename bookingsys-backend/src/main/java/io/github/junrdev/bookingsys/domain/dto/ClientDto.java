@@ -18,25 +18,6 @@ public class ClientDto {
     public ClientDto() {
     }
 
-    public ClientDto(String id, String fullName, String identification, String email, String phone, Location location, Kyc kyc) {
-        this.id = id;
-        this.fullName = fullName;
-        this.identification = identification;
-        this.email = email;
-        this.phone = phone;
-        this.location = location;
-        this.kyc = kyc;
-    }
-
-    public ClientDto(String fullName, String identification, String email, String phone, Location location, Kyc kyc) {
-        this.fullName = fullName;
-        this.identification = identification;
-        this.email = email;
-        this.phone = phone;
-        this.location = location;
-        this.kyc = kyc;
-    }
-
     public String getId() {
         return id;
     }
@@ -93,6 +74,22 @@ public class ClientDto {
         this.kyc = kyc;
     }
 
+    public String getCounty() {
+        return county;
+    }
+
+    public void setCounty(String county) {
+        this.county = county;
+    }
+
+    public String getSubCounty() {
+        return subCounty;
+    }
+
+    public void setSubCounty(String subCounty) {
+        this.subCounty = subCounty;
+    }
+
     @Override
     public String toString() {
         return "ClientDto{" +
@@ -103,6 +100,8 @@ public class ClientDto {
                 ", phone='" + phone + '\'' +
                 ", location=" + location +
                 ", kyc=" + kyc +
+                ", county='" + county + '\'' +
+                ", subCounty='" + subCounty + '\'' +
                 '}';
     }
 }

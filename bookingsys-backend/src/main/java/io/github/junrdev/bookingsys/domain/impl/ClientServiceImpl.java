@@ -2,7 +2,11 @@ package io.github.junrdev.bookingsys.domain.impl;
 
 import io.github.junrdev.bookingsys.domain.dto.ClientDto;
 import io.github.junrdev.bookingsys.model.Client;
+import io.github.junrdev.bookingsys.model.County;
+import io.github.junrdev.bookingsys.model.SubCounty;
 import io.github.junrdev.bookingsys.repository.ClientRepository;
+import io.github.junrdev.bookingsys.repository.CountyRepository;
+import io.github.junrdev.bookingsys.repository.SubCountyRepository;
 import io.github.junrdev.bookingsys.service.ClientService;
 import io.github.junrdev.bookingsys.util.mappers.ClientMapper;
 import io.github.junrdev.bookingsystem.error.model.NotFoundException;
@@ -16,18 +20,38 @@ import java.util.UUID;
 public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository clientRepository;
+    private final CountyRepository countyRepository;
+    private final SubCountyRepository subCountyRepository;
+
     private final ClientMapper clientMapper;
 
     @Autowired
-    public ClientServiceImpl(ClientRepository clientRepository, ClientMapper clientMapper) {
+    public ClientServiceImpl(ClientRepository clientRepository, CountyRepository countyRepository, SubCountyRepository subCountyRepository, ClientMapper clientMapper) {
         this.clientRepository = clientRepository;
+        this.countyRepository = countyRepository;
+        this.subCountyRepository = subCountyRepository;
         this.clientMapper = clientMapper;
     }
 
     @Override
-    public Client createClient(ClientDto client) {
-        client.setIdentification(UUID.randomUUID().toString());
-        return clientRepository.save(clientMapper.toEntity(client));
+    public Client createClient(ClientDto clientDto) {
+        Client client = clientMapper.toEntity(clientDto);
+
+        County county = countyRepository.findByCountyNameContains(clientDto.getCounty())
+                .orElseThrow(() -> new NotFoundException("County " + clientDto.getCounty() + " not found."));
+
+        SubCounty subCounty = subCountyRepository.findBySubCountyName(clientDto.getSubCounty())
+                .orElseThrow(() -> new NotFoundException("SubCounty " + clientDto.getSubCounty() + " not found."));
+
+        if (clientDto.getIdentification() == null)
+            client.setIdentification(UUID.randomUUID().toString());
+
+        client.setLocationName(subCounty.subCountyName() + "," + county.countyName());
+
+        client.setCounty(county);
+        client.setSubCounty(subCounty);
+
+        return clientRepository.save(client);
     }
 
     @Override

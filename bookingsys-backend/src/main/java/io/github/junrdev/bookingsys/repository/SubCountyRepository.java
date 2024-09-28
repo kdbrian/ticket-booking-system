@@ -11,7 +11,7 @@ public interface SubCountyRepository extends MongoRepository<SubCounty, String> 
 
     List<SubCounty> findByCountyNumber(int countyNumber);
 
-    List<SubCounty> findByCountyName(String countyName);
+    List<SubCounty> findByCountyNameContains(String countyName);
 
     Optional<SubCounty> findBySubCountyName(String subCountyName);
 

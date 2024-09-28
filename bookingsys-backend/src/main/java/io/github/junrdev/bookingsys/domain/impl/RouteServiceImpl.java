@@ -43,7 +43,7 @@ public class RouteServiceImpl implements RouteService {
         Route route = routeMapper.routeDtoToRoute(dto);
         return scheduleRepository.findById(dto.getScheduleId())
                 .map(schedule -> {
-                    County county = countyRepository.findByCountyName(dto.getCountyName())
+                    County county = countyRepository.findByCountyNameContains(dto.getCountyName())
                             .orElseThrow(() -> new NotFoundException("County " + dto.getCountyName() + " not found."));
 
                     SubCounty subCounty = subCountyRepository.findBySubCountyName(dto.getSubCountyName())
@@ -90,7 +90,7 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public List<Route> findByCounty(String countyName) {
-        County county = countyRepository.findByCountyName(countyName)
+        County county = countyRepository.findByCountyNameContains(countyName)
                 .orElseThrow(() -> new NotFoundException("County " + countyName + " not found."));
 
         return routeRepository.findByCounty(county);
@@ -107,7 +107,7 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public List<Route> findByCountyAndSubCounty(String countyName, String subCountyName) {
 
-        County county = countyRepository.findByCountyName(countyName)
+        County county = countyRepository.findByCountyNameContains(countyName)
                 .orElseThrow(() -> new NotFoundException("County " + countyName + " not found."));
 
         SubCounty subCounty = subCountyRepository.findBySubCountyName(subCountyName)
