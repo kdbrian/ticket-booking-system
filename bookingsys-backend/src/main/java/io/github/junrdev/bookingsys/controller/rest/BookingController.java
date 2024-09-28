@@ -55,7 +55,7 @@ public class BookingController {
         return ResponseEntity.ok(bookingMapper.toDto(bookingService.cancelBooking(bookingId)));
     }
 
-    @PatchMapping("/{bookingId}/delete")
+    @DeleteMapping("/{bookingId}/delete")
     public ResponseEntity<Void> deleteBooking(@PathVariable String bookingId) {
         bookingService.deleteBooking(bookingId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

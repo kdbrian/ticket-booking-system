@@ -4,11 +4,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Document
 public class Vehicle {
@@ -36,19 +34,9 @@ public class Vehicle {
 
     private Long timeOfTravel;
 
-    public Vehicle() {
-    }
+    private Long updateslug;
 
-    public Vehicle(Route route, List<Seat> seats, Long seatCount, Double price, Double discount, Long leavingTime, List<String> additionalInfo, String vehicleName, Long timeOfTravel) {
-        this.route = route;
-        this.seats = seats;
-        this.seatCount = seatCount;
-        this.price = price;
-        this.discount = discount;
-        this.leavingTime = leavingTime;
-        this.additionalInfo = additionalInfo;
-        this.vehicleName = vehicleName;
-        this.timeOfTravel = timeOfTravel;
+    public Vehicle() {
     }
 
     public String getVehicleId() {
@@ -132,6 +120,24 @@ public class Vehicle {
         this.timeOfTravel = timeOfTravel;
     }
 
+    public Long getUpdateslug() {
+        return updateslug;
+    }
+
+    public void setUpdateslug(Long updateslug) {
+        this.updateslug = updateslug;
+    }
+
+    public Seat getSeat(String seatNo) {
+        if (this.seats != null && !this.getSeats().isEmpty()) {
+            Optional<Seat> seat = this.seats.stream()
+                    .filter(seat1 -> seat1.getSeatNo().equalsIgnoreCase(seatNo))
+                    .findFirst();
+            return seat.orElse(null);
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return "Vehicle{" +
@@ -145,8 +151,8 @@ public class Vehicle {
                 ", additionalInfo=" + additionalInfo +
                 ", vehicleName='" + vehicleName + '\'' +
                 ", timeOfTravel=" + timeOfTravel +
+                ", updateslug=" + updateslug +
                 '}';
     }
-
 }
 

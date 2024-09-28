@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Document
 public class Booking {
@@ -34,7 +35,7 @@ public class Booking {
     private BOOKING_STATUS bookingStatus;
     private BOOKING_TYPE bookingType;
     private PAYMENT_STATUS paymentStatus;
-    private Long updateSlug= System.currentTimeMillis();
+    private Long updateSlug = System.currentTimeMillis();
 
     public Long getUpdateSlug() {
         return updateSlug;
@@ -59,7 +60,6 @@ public class Booking {
     public void setPaymentStatus(PAYMENT_STATUS paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
-
 
 
     public Booking() {

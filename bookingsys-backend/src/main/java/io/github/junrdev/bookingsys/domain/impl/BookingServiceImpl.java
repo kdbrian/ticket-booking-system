@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -87,11 +88,15 @@ public class BookingServiceImpl implements BookingService {
                 .filter(Objects::nonNull) // Filter out the seats that were already occupied
                 .collect(Collectors.toList());
 
+        if (bookedSeats.isEmpty())
+            throw new NotFoundException("All selected seats are occupied.");
+
         // Set the booked seats in the booking
         booking.setSeats(bookedSeats);
 
         // Update the vehicle's seats list in MongoDB
         vehicle.setSeats(vehicleSeats);
+        vehicle.setUpdateslug(System.currentTimeMillis());
         vehicleRepository.save(vehicle);
 
         // Set other fields in booking
@@ -130,20 +135,20 @@ public class BookingServiceImpl implements BookingService {
                         Vehicle vehicle = vehicleRepository.findById(booking1.getVehicle().getVehicleId())
                                 .orElseThrow(() -> new NotFoundException("Vehicle " + booking1.getVehicle().getVehicleId() + " not found"));
 
-                        List<Seat> vehicleSeats = vehicle.getSeats();
-                        log.info("before {}", vehicleSeats);
-
                         //find seats
-                        booking1.getSeats().forEach(seat -> {
-                            if (vehicleSeats.contains(seat))
+                        List<String> booked = booking1.getSeats().stream().map(Seat::getSeatNo).toList();
+
+                        List<Seat> vehicleSeats = vehicle.getSeats().stream().peek(seat -> {
+                            if (booked.contains(seat.getSeatNo())) {
                                 seat.release();
-                        });
+                            }
+                        }).toList();
 
-                        log.info("after {}", vehicleSeats);
+                        vehicle.setSeats(vehicleSeats);
+                        booking1.setSeats(Collections.emptyList());
 
-                        //release
-
-
+                        vehicle.setUpdateslug(System.currentTimeMillis());
+                        vehicleRepository.save(vehicle);
                         booking1.setUpdateSlug(System.currentTimeMillis());
                         return bookingRepository.save(booking1);
                     } else
@@ -154,11 +159,27 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public boolean deleteBooking(String bookingId) {
-        if (bookingRepository.existsById(bookingId)) {
+        return bookingRepository.findById(bookingId).map(booking -> {
+            //get vehicle
+            Vehicle vehicle = vehicleRepository.findById(booking.getVehicle().getVehicleId())
+                    .orElseThrow(() -> new NotFoundException("Vehicle " + booking.getVehicle().getVehicleId() + " not found"));
+
+            //find seats
+            List<String> booked = booking.getSeats().stream().map(Seat::getSeatNo).toList();
+
+            List<Seat> vehicleSeats = vehicle.getSeats().stream().peek(seat -> {
+                if (booked.contains(seat.getSeatNo()) && seat.getOccupied()) {
+                    seat.release();
+                }
+            }).toList();
+
+            vehicle.setSeats(vehicleSeats);
+            vehicle.setUpdateslug(System.currentTimeMillis());
+            vehicleRepository.save(vehicle);
             bookingRepository.deleteById(bookingId);
             return true;
-        } else
-            throw new NotFoundException(String.format("Booking %s, not found", bookingId));
+        }).orElseThrow(
+                () -> new NotFoundException(String.format("Booking %s, not found", bookingId)));
     }
 
     @Override
