@@ -27,7 +27,7 @@ public class RoutesGraphController {
     }
 
     @QueryMapping
-    public Route getRouteById(@Argument String  id){
+    public Route getRouteById(@Argument String id) {
         return routeService.getRouteById(id);
     }
 
@@ -39,5 +39,20 @@ public class RoutesGraphController {
     @MutationMapping
     public boolean deleteRoute(@Argument String id) {
         return routeService.deleteRoute(id);
+    }
+
+    @QueryMapping
+    public List<Route> getCountyRoutes(@Argument String countyName) {
+        return routeService.findByCounty(countyName);
+    }
+
+    @QueryMapping
+    public List<Route> getSubCountyRoutes(@Argument String subCountyName) {
+        return routeService.findBySubCounty(subCountyName);
+    }
+
+    @QueryMapping
+    public List<Route> getRegionRoutes(@Argument String countyName, @Argument String subCountyName) {
+        return routeService.findByCountyAndSubCounty(countyName, subCountyName);
     }
 }

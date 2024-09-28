@@ -45,4 +45,14 @@ public class BookingsGraphController {
     public Booking cancelBooking(@Argument String bookingId) {
         return bookingService.cancelBooking(bookingId);
     }
+
+    @QueryMapping
+    public List<Booking> getClientBookings(@Argument String clientId){
+        return bookingService.getClientBookings(clientId);
+    }
+
+    @QueryMapping
+    public List<Booking> getVehicleBookings(@Argument String vehicleId){
+        return bookingService.getVehicleBookings(vehicleId);
+    }
 }
