@@ -7,7 +7,7 @@ query GetClients{
     }
 }
 
-query GetClientById($id:ID){
+query GetClientById($id:ID!){
     getClientById(id: $id){
         id
         fullName
@@ -18,7 +18,7 @@ query GetClientById($id:ID){
     }
 }
 
-mutation SaveClient($dto : ClientDto){
+mutation SaveClient($dto : ClientDto!){
     addClient(dto: $dto){
         id
         fullName

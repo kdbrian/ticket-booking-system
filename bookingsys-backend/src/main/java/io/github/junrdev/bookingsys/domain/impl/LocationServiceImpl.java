@@ -5,6 +5,8 @@ import io.github.junrdev.bookingsys.model.SubCounty;
 import io.github.junrdev.bookingsys.repository.CountyRepository;
 import io.github.junrdev.bookingsys.repository.SubCountyRepository;
 import io.github.junrdev.bookingsys.service.LocationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ import java.util.List;
 
 @Service
 public class LocationServiceImpl implements LocationService {
+
+    private static final Logger logger = LoggerFactory.getLogger(LocationServiceImpl.class);
 
     private final CountyRepository countyRepository;
     private final SubCountyRepository subCountyRepository;
@@ -39,6 +43,8 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public List<SubCounty> getSubCountiesByCountyName(String countyName) {
+        logger.info("cname {}",countyName);
+
         return subCountyRepository.findByCountyName(countyName);
     }
 }

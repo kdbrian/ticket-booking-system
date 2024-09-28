@@ -1,0 +1,28 @@
+query FetchCounties {
+    getCounties {
+        countyName
+        countyNumber
+    }
+}
+
+query FetchSubCounties {
+    getSubCounties {
+        countyNumber
+        subCountyName
+    }
+}
+
+
+query FetchSubCountyByCountyName($name : String!){
+    getSubCountiesByCountyName(countyName: $name){
+        subCountyName
+        countyNumber
+    }
+}
+
+query FetchSubCountyByCountyNumber($number : Int!){
+    getSubCountiesByCountyNumber(countyNumber: $number){
+        countyNumber
+        subCountyName
+    }
+}

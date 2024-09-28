@@ -9,7 +9,7 @@ query FetchCompanies{
     }
 }
 
-query FetchCompanyById($id : ID){
+query FetchCompanyById($id : ID!){
     getCompanyById(id : $id) {
         id
         images

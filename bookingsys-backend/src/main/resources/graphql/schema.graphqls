@@ -2,55 +2,62 @@
 type Query{
     # companies
     getCompanies : [Company!]
-    getCompanyById(id : ID) : Company!
+    getCompanyById(id : ID!) : Company!
 
     # clients
     getAllClients : [Client!]
-    getClientById(id : ID) : Client!
+    getClientById(id : ID!) : Client!
 
     #routes
     getAllRoutes : [Route!]
-    getRouteById(id : ID) : Route!
+    getRouteById(id : ID!) : Route!
 
     #schedule
     getAllSchedules : [Schedule!]
-    getScheduleById(id : ID) : Schedule!
+    getScheduleById(id : ID!) : Schedule!
 
     #vehicles
-    getVehicleById(id : ID) : Vehicle!
+    getVehicleById(id : ID!) : Vehicle!
     getAllVehicles : [Vehicle!]
     getVehiclesByRoute(routeId : String) : [Vehicle!]
 
     #bookings
-    getBookingById(id : ID) : Booking!
+    getBookingById(id : ID!) : Booking!
     getAllBookings : [Booking!]
+
+    #locations
+    getCounties: [County!]
+    getSubCounties: [SubCounty!]
+    getSubCountiesByCountyNumber(countyNumber : Int!): [SubCounty!]
+    getSubCountiesByCountyName(countyName : String!): [SubCounty!]
+
 }
 
 # mutations
 type Mutation {
 
     # client
-    addClient(dto : ClientDto) : Client
+    addClient(dto : ClientDto!) : Client
 
     #company
-    createCompany(dto : CompanyDto): Company!
+    createCompany(dto : CompanyDto!): Company!
     deleteCompany(id : String) : Boolean
 
     #schedules
-    saveSchedule(dto : ScheduleDto) : Schedule
+    saveSchedule(dto : ScheduleDto!) : Schedule
     deleteSchedule(id : ID) : Boolean
 
     #routes
-    saveRoute(dto : RouteDto) : Route
+    saveRoute(dto : RouteDto!) : Route
     deleteRoute(id : ID) : Boolean
 
     #vehicles
-    saveVehicle(dto: VehicleDto) : Vehicle
+    saveVehicle(dto: VehicleDto!) : Vehicle
     updateVehicle(id :ID, dto : VehicleDto) : Vehicle
     deleteVehicle(id: ID) : Boolean
 
     #bookings
-    saveBooking(dto : BookingDto) : Booking
+    saveBooking(dto : BookingDto!) : Booking
     deleteBooking(bookingId : String) : Boolean
     cancelBooking(bookingId : String) : Booking
 

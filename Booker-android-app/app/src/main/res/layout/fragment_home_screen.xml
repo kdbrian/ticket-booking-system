@@ -155,6 +155,7 @@
                                     android:background="@drawable/transparentbg"
                                     android:drawableStart="@drawable/round_calendar_month_24"
                                     android:ems="10"
+                                    android:enabled="false"
                                     android:inputType="date" />
 
                                 <Switch
@@ -164,6 +165,28 @@
                                     android:layout_gravity="center_vertical"
                                     android:layout_weight="0" />
 
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/ubuntubold"
+                                    android:text="Choose County"
+                                    android:textSize="16sp" />
+
+                                <Spinner
+                                    android:id="@+id/spinner5"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:background="@drawable/roundedshapedstroked12dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -186,7 +209,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/ubuntubold"
-                                        android:text="TextView"
+                                        android:text="From"
                                         android:textSize="16sp" />
 
                                     <Spinner
@@ -209,7 +232,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/ubuntubold"
-                                        android:text="TextView"
+                                        android:text="To"
                                         android:textSize="16sp" />
 
                                     <Spinner

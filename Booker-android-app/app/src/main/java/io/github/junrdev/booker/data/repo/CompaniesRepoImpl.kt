@@ -23,7 +23,7 @@ class CompaniesRepoImpl @Inject constructor(
 
     override suspend fun getCompanyById(id: String): Result<FetchCompanyByIdQuery.Data> {
         return try {
-            val resp = apolloClient.query(FetchCompanyByIdQuery()).execute()
+            val resp = apolloClient.query(FetchCompanyByIdQuery(id)).execute()
             resp.data?.let {
                 Result.success(it)
             } ?: run { Result.failure(resp.exception!!) }

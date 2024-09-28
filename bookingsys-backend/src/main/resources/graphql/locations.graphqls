@@ -1,0 +1,9 @@
+type County{
+    countyNumber : Int,
+    countyName : String
+}
+
+type SubCounty{
+    countyNumber : Int,
+    subCountyName : String
+}

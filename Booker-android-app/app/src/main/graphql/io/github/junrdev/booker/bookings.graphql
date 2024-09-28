@@ -1,5 +1,4 @@
 query GetBookings{
-
     getAllBookings {
         id
         bookingStatus
@@ -22,7 +21,33 @@ query GetBookings{
             }
         }
     }
+}
+
+query GetBookingById($id : ID!){
+    getBookingById(id: $id){
+        id
+        seats {
+            seatNo
+        }
+        isActive
+        bookingDate
+        bookingType
+        bookingStatus
+    }
+}
 
 
-
+mutation SaveBooking (
+    $bookingdto : BookingDto!
+){
+    saveBooking(dto: $bookingdto){
+        id
+        seats {
+            seatNo
+        }
+        isActive
+        bookingDate
+        bookingType
+        bookingStatus
+    }
 }

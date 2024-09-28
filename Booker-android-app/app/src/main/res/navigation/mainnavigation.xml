@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_homeScreen_to_routeScreen"
             app:destination="@id/routeScreen" />
+        <action
+            android:id="@+id/action_homeScreen_to_datePickerDialog"
+            app:destination="@id/datePickerDialog" />
     </fragment>
     <fragment
         android:id="@+id/searchResults"
@@ -54,4 +57,9 @@
         android:name="io.github.junrdev.booker.presentation.ui.screens.RouteScreen"
         android:label="fragment_route_screen"
         tools:layout="@layout/fragment_route_screen" />
+    <dialog
+        android:id="@+id/datePickerDialog"
+        android:name="io.github.junrdev.booker.presentation.ui.screens.DatePickerDialog"
+        android:label="fragment_date_picker_dialog"
+        tools:layout="@layout/fragment_date_picker_dialog" />
 </navigation>
