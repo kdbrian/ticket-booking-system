@@ -11,6 +11,9 @@ type Query{
     #routes
     getAllRoutes : [Route!]
     getRouteById(id : ID!) : Route!
+    getCountyRoutes(countyName:String!):[Booking]
+    getSubCountyRoutes(subCountyName:String!):[Booking]
+    getRegionRoutes(countyName:String!, subCountyName:String!):[Booking]
 
     #schedule
     getAllSchedules : [Schedule!]
@@ -19,11 +22,14 @@ type Query{
     #vehicles
     getVehicleById(id : ID!) : Vehicle!
     getAllVehicles : [Vehicle!]
-    getVehiclesByRoute(routeId : String) : [Vehicle!]
+    getVehiclesByRoute(routeId : String!) : [Vehicle]
 
     #bookings
     getBookingById(id : ID!) : Booking!
     getAllBookings : [Booking!]
+    getClientBookings(clientId : ID!) : [Booking!]
+    getVehicleBookings(vehicleId : ID!) : [Booking!]
+
 
     #locations
     getCounties: [County!]
@@ -58,8 +64,8 @@ type Mutation {
 
     #bookings
     saveBooking(dto : BookingDto!) : Booking
-    deleteBooking(bookingId : String) : Boolean
     cancelBooking(bookingId : String) : Booking
+    deleteBooking(bookingId : String) : Boolean
 
 }
 

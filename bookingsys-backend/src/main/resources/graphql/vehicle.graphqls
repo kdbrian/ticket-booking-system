@@ -18,7 +18,8 @@ type Vehicle{
     leavingTime:String,
     vehicleName:String,
     additionalInfo : [String!]
-    timeOfTravel : Float
+    timeOfTravel : Float,
+    updateslug : Float
 }
 
 input VehicleDto{

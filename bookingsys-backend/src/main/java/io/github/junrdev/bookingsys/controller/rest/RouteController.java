@@ -81,9 +81,9 @@ public class RouteController {
     }
 
 
-    // Delete a Route by ID
+    // update a Route by ID
     @PatchMapping("/{id}/update")
-    public ResponseEntity<RouteDto> deleteRoute(@PathVariable String id, @RequestBody RouteDto dto) {
+    public ResponseEntity<RouteDto> updateRoute(@PathVariable String id, @RequestBody RouteDto dto) {
         if (routeService.getRouteById(id) != null) {
             Route saved = routeService.updateRoute(id, dto);
             return ResponseEntity.ok(routeMapper.routeToRouteDto(saved));

@@ -4,14 +4,18 @@ type Route{
     toLocation : Location
     fromLocationName : String,
     toLocationName : String,
-    vehicles : [Vehicle]
+    vehicles : [Vehicle],
+    subCountyName : String,
+    countyName : String
 }
 
 
 input RouteDto{
-    scheduleId : String,
+    scheduleId : String!,
     fromLocation : LocationDto,
     toLocation : LocationDto,
     fromLocationName : String,
     toLocationName : String
+    subCountyName : String!,
+    countyName : String!
 }

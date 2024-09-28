@@ -1,10 +1,12 @@
 input CompanyDto {
-    fullName : String,
-    email : String,
-    phone : String,
+    fullName : String!,
+    email : String!,
+    phone : String!,
     location: LocationDto,
     images : [String],
-    locationArea : String
+    locationArea : String,
+    subCountyName : String,
+    countyName : String
 }
 
 type Company {
@@ -17,7 +19,8 @@ type Company {
     isActive:Boolean,
     locationArea:String,
     location : Location,
-
+    subCountyName : String,
+    countyName : String
 }
 
 input LocationDto {

@@ -8,7 +8,9 @@ type Client{
     isActive : Boolean,
     clientType : ClientType,
     dateJoined : String,
-    kyc : Kyc
+    kyc : Kyc,
+    county:County,
+    subCounty:SubCounty
 }
 
 input ClientDto{
@@ -16,7 +18,10 @@ input ClientDto{
     email:String,
     phone:String,
     location:LocationDto,
-    clientType : ClientType
+    clientType : ClientType,
+    subCounty : String,
+    county : String
+
 }
 
 type Kyc {
