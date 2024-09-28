@@ -29,21 +29,21 @@ public class ScheduleController {
     // Create or Update a Schedule
 
     @PostMapping("/new")
-    public ResponseEntity<Schedule> createOrUpdateSchedule(@RequestBody ScheduleDto dto) {
-        return ResponseEntity.ok(scheduleService.saveSchedule(dto));
+    public ResponseEntity<ScheduleDto> createOrUpdateSchedule(@RequestBody ScheduleDto dto) {
+        return ResponseEntity.ok(scheduleMapper.scheduleToScheduleDto(scheduleService.saveSchedule(dto)));
     }
 
     // Retrieve a Schedule by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Schedule> getScheduleById(@PathVariable String id) {
-        return ResponseEntity.ok(scheduleService.getScheduleById(id));
+    public ResponseEntity<ScheduleDto> getScheduleById(@PathVariable String id) {
+        return ResponseEntity.ok(scheduleMapper.scheduleToScheduleDto(scheduleService.getScheduleById(id)));
     }
 
     // Retrieve all Schedules
     @GetMapping("/")
-    public ResponseEntity<List<Schedule>> getAllSchedules() {
+    public ResponseEntity<List<ScheduleDto>> getAllSchedules() {
         List<Schedule> schedules = scheduleService.getAllSchedules();
-        return ResponseEntity.ok(schedules);
+        return ResponseEntity.ok(schedules.stream().map(scheduleMapper::scheduleToScheduleDto).toList());
     }
 
     // Delete a Schedule by ID

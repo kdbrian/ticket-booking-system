@@ -21,40 +21,42 @@ public class VehicleController {
 
     private static final Logger log = LoggerFactory.getLogger(VehicleController.class);
     private final VehicleService vehicleService;
+    private final VehicleMappers vehicleMappers;
 
     @Autowired
-    public VehicleController(VehicleService vehicleService, VehicleMappers vehicleMappers) {
+    public VehicleController(VehicleService vehicleService, VehicleMappers vehicleMappers, VehicleMappers vehicleMappers1) {
         this.vehicleService = vehicleService;
+        this.vehicleMappers = vehicleMappers1;
     }
 
 
     // Create or Update a Vehicle
     @PostMapping("/new")
-    public ResponseEntity<Vehicle> saveVehicle(@RequestBody VehicleDto dto) {
+    public ResponseEntity<VehicleDto> saveVehicle(@RequestBody VehicleDto dto) {
         Vehicle savedVehicle = vehicleService.saveVehicle(dto);
-        return ResponseEntity.ok(savedVehicle);
+        return ResponseEntity.ok(vehicleMappers.toDto(savedVehicle));
     }
 
     // Retrieve a Vehicle by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Vehicle> getVehicleById(@PathVariable("id") String id) {
+    public ResponseEntity<VehicleDto> getVehicleById(@PathVariable("id") String id) {
         Vehicle vehicle1 = vehicleService.getVehicleById(id);
-        return ResponseEntity.ok(vehicle1);
+        return ResponseEntity.ok(vehicleMappers.toDto(vehicle1));
     }
 
     // Retrieve all Vehicles
     @GetMapping("/")
-    public ResponseEntity<List<Vehicle>> getAllVehicles() {
+    public ResponseEntity<List<VehicleDto>> getAllVehicles() {
         List<Vehicle> vehicles = vehicleService.getAllVehicles();
-        return ResponseEntity.ok(vehicles);
+        return ResponseEntity.ok(vehicles.stream().map(vehicleMappers::toDto).toList());
     }
 
     @PatchMapping("/{id}/update")
-    public ResponseEntity<Vehicle> updateVehicle(
+    public ResponseEntity<VehicleDto> updateVehicle(
             @PathVariable("id") String id,
             @RequestBody VehicleDto dto
     ) {
-        return ResponseEntity.ok(vehicleService.updateVehicle(id, dto));
+        return ResponseEntity.ok(vehicleMappers.toDto(vehicleService.updateVehicle(id, dto)));
     }
 
     // Delete a Vehicle by ID
@@ -65,12 +67,10 @@ public class VehicleController {
     }
 
     @GetMapping("/route")
-    public ResponseEntity<List<Vehicle>> getRouteVehicles(
+    public ResponseEntity<List<VehicleDto>> getRouteVehicles(
             @RequestParam("id") String routeId
     ) {
-        log.info("Route {},", routeId);
-        System.out.println("Invoked");
-        return ResponseEntity.ok(vehicleService.getVehiclesByRoute(routeId));
+        return ResponseEntity.ok(vehicleService.getVehiclesByRoute(routeId).stream().map(vehicleMappers::toDto).toList());
     }
 
 }

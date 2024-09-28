@@ -34,8 +34,8 @@ public class RouteController {
 
     // Retrieve a Route by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Route> getRouteById(@PathVariable String id) {
-        return ResponseEntity.ok(routeService.getRouteById(id));
+    public ResponseEntity<RouteDto> getRouteById(@PathVariable String id) {
+        return ResponseEntity.ok(routeMapper.routeToRouteDto(routeService.getRouteById(id)));
     }
 
     // Retrieve all Routes
@@ -44,6 +44,42 @@ public class RouteController {
         List<Route> routes = routeService.getAllRoutes();
         return ResponseEntity.ok(routes.stream().map(routeMapper::routeToRouteDto).toList());
     }
+
+    @GetMapping("/county")
+    public ResponseEntity<List<RouteDto>> getRoutesByCounty(
+            @RequestParam("countyName") String countyName
+    ) {
+        return ResponseEntity.ok(
+                routeService
+                        .findByCounty(countyName)
+                        .stream()
+                        .map(routeMapper::routeToRouteDto).toList());
+    }
+
+    @GetMapping("/subcounty")
+    public ResponseEntity<List<RouteDto>> getRoutesBySubCounty(
+            @RequestParam("subCountyName") String subCountyName
+    ) {
+        return ResponseEntity.ok(
+                routeService
+                        .findBySubCounty(subCountyName)
+                        .stream()
+                        .map(routeMapper::routeToRouteDto).toList());
+    }
+
+
+    @GetMapping("/region")
+    public ResponseEntity<List<RouteDto>> getRoutesBySubCounty(
+            @RequestParam("countyName") String countyName,
+            @RequestParam("subCountyName") String subCountyName
+    ) {
+        return ResponseEntity.ok(
+                routeService
+                        .findByCountyAndSubCounty(countyName, subCountyName)
+                        .stream()
+                        .map(routeMapper::routeToRouteDto).toList());
+    }
+
 
     // Delete a Route by ID
     @PatchMapping("/{id}/update")

@@ -5,7 +5,7 @@ import io.github.junrdev.bookingsys.model.Vehicle;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {RouteMapper.class})
 public interface VehicleMappers {
 
     // Map entity to DTO

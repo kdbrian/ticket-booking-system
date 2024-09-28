@@ -43,8 +43,6 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public List<SubCounty> getSubCountiesByCountyName(String countyName) {
-        logger.info("cname {}",countyName);
-
         return subCountyRepository.findByCountyName(countyName);
     }
 }

@@ -14,10 +14,10 @@ public class RouteDto {
     private Location toLocation;
     private String fromLocationName;
     private String toLocationName;
-    private String county;
-    private String subCounty;
+    private String countyName;
+    private String subCountyName;
 
-    private List<Vehicle> vehicles = new ArrayList<>();
+    private List<VehicleDto> vehicles = new ArrayList<>();
 
     public RouteDto() {
     }
@@ -70,28 +70,32 @@ public class RouteDto {
         this.toLocationName = toLocationName;
     }
 
-    public List<Vehicle> getVehicles() {
+    public List<VehicleDto> getVehicles() {
         return vehicles;
     }
 
-    public void setVehicles(List<Vehicle> vehicles) {
+    public void setVehicles(List<VehicleDto> vehicles) {
         this.vehicles = vehicles;
     }
 
-    public String getCounty() {
-        return county;
+    public String getCountyName() {
+        return countyName;
     }
 
-    public void setCounty(String county) {
-        this.county = county;
+    public void setCountyName(String countyName) {
+        this.countyName = countyName;
     }
 
-    public String getSubCounty() {
-        return subCounty;
+    public String getSubCountyName() {
+        return subCountyName;
+    }
+
+    public void setSubCountyName(String subCountyName) {
+        this.subCountyName = subCountyName;
     }
 
     public void setSubCounty(String subCounty) {
-        this.subCounty = subCounty;
+        this.subCountyName = subCounty;
     }
 
     @Override
@@ -103,8 +107,8 @@ public class RouteDto {
                 ", toLocation=" + toLocation +
                 ", fromLocationName='" + fromLocationName + '\'' +
                 ", toLocationName='" + toLocationName + '\'' +
-                ", county='" + county + '\'' +
-                ", subCounty='" + subCounty + '\'' +
+                ", county='" + countyName + '\'' +
+                ", subCounty='" + subCountyName + '\'' +
                 ", vehicles=" + vehicles +
                 '}';
     }

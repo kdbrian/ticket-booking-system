@@ -27,7 +27,7 @@ public class Vehicle {
 
     private Double discount;
 
-    private Long leavingTime;
+    private Long leavingTime = System.currentTimeMillis();
 
     private List<String> additionalInfo = new ArrayList<>();
 

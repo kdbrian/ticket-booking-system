@@ -18,12 +18,10 @@ import java.util.List;
 public class CompaniesGraphController {
 
     private final CompanyService companyService;
-    private final CompanyMapper companyMapper;
 
     @Autowired
     public CompaniesGraphController(CompanyService companyService, CompanyMapper companyMapper) {
         this.companyService = companyService;
-        this.companyMapper = companyMapper;
     }
 
     @QueryMapping
@@ -33,12 +31,12 @@ public class CompaniesGraphController {
 
     @MutationMapping
     public Company createCompany(@Argument CompanyDto dto) {
-        Company company = companyMapper.companyDToCompany(dto);
-        return companyService.saveCompany(company);
+//        Company company = companyMapper.companyDToCompany(dto);
+        return companyService.saveCompany(dto);
     }
 
     @MutationMapping
-    public Boolean deleteCompany(@Argument String id){
+    public Boolean deleteCompany(@Argument String id) {
         return companyService.deleteCompany(id);
     }
 

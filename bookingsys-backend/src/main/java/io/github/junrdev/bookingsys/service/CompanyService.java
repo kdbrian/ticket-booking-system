@@ -1,5 +1,6 @@
 package io.github.junrdev.bookingsys.service;
 
+import io.github.junrdev.bookingsys.domain.dto.CompanyDto;
 import io.github.junrdev.bookingsys.model.Company;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.Optional;
 
 public interface CompanyService {
 
-    Company saveCompany(Company company);
+    Company saveCompany(CompanyDto companyDto);
 
     Optional<Company> getCompanyById(String id);
 

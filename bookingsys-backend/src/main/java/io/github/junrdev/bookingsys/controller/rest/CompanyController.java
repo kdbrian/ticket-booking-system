@@ -1,5 +1,6 @@
 package io.github.junrdev.bookingsys.controller.rest;
 
+import io.github.junrdev.bookingsys.domain.dto.CompanyDto;
 import io.github.junrdev.bookingsys.model.Company;
 import io.github.junrdev.bookingsys.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ public class CompanyController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<Company> createCompany(@RequestBody Company company) {
-        return ResponseEntity.ok(service.saveCompany(company));
+    public ResponseEntity<Company> createCompany(@RequestBody CompanyDto companyDto) {
+        return ResponseEntity.ok(service.saveCompany(companyDto));
     }
 
     @GetMapping("/")

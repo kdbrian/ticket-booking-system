@@ -7,7 +7,7 @@ import io.github.junrdev.bookingsys.model.Schedule;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {VehicleMappers.class})
+@Mapper(componentModel = "spring", uses = {VehicleMappers.class, RouteMapper.class})
 public interface ScheduleMapper {
 
     @Mapping(source = "company.id", target = "companyId")
@@ -16,9 +16,4 @@ public interface ScheduleMapper {
 //    @Mapping(source = "id", target = "scheduleId")
     Schedule scheduleDtoToSchedule(ScheduleDto scheduleDto);
 
-    @Mapping(source = "schedule.id", target = "scheduleId")
-    RouteDto routeToRouteDto(Route route);
-
-    @Mapping(source = "scheduleId", target = "schedule.id")
-    Route routeDtoToRoute(RouteDto routeDto);
 }
