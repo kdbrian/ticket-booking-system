@@ -25,6 +25,12 @@ public class Route {
     private String toLocationName;
 
     @DBRef
+    private County county;
+
+    @DBRef
+    private SubCounty subCounty;
+
+    @DBRef
     transient private Schedule schedule;
 
     private List<Vehicle> vehicles = new ArrayList<>();
@@ -32,11 +38,14 @@ public class Route {
     public Route() {
     }
 
-    public Route(Location fromLocation, Location toLocation, String fromLocationName, String toLocationName, Schedule schedule, List<Vehicle> vehicles) {
+    public Route(String id, Location fromLocation, Location toLocation, String fromLocationName, String toLocationName, County county, SubCounty subCounty, Schedule schedule, List<Vehicle> vehicles) {
+        this.id = id;
         this.fromLocation = fromLocation;
         this.toLocation = toLocation;
         this.fromLocationName = fromLocationName;
         this.toLocationName = toLocationName;
+        this.county = county;
+        this.subCounty = subCounty;
         this.schedule = schedule;
         this.vehicles = vehicles;
     }
@@ -104,14 +113,32 @@ public class Route {
         this.vehicles.add(vehicle);
     }
 
+    public County getCounty() {
+        return county;
+    }
+
+    public void setCounty(County county) {
+        this.county = county;
+    }
+
+    public SubCounty getSubCounty() {
+        return subCounty;
+    }
+
+    public void setSubCounty(SubCounty subCounty) {
+        this.subCounty = subCounty;
+    }
+
     @Override
     public String toString() {
         return "Route{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", fromLocation=" + fromLocation +
                 ", toLocation=" + toLocation +
                 ", fromLocationName='" + fromLocationName + '\'' +
                 ", toLocationName='" + toLocationName + '\'' +
+                ", county=" + county +
+                ", subCounty=" + subCounty +
                 ", schedule=" + schedule +
                 ", vehicles=" + vehicles +
                 '}';

@@ -14,28 +14,12 @@ public class RouteDto {
     private Location toLocation;
     private String fromLocationName;
     private String toLocationName;
+    private String county;
+    private String subCounty;
+
     private List<Vehicle> vehicles = new ArrayList<>();
 
     public RouteDto() {
-    }
-
-    public RouteDto(String scheduleId, Location fromLocation, Location toLocation, String fromLocationName, String toLocationName, List<Vehicle> vehicles) {
-        this.scheduleId = scheduleId;
-        this.fromLocation = fromLocation;
-        this.toLocation = toLocation;
-        this.fromLocationName = fromLocationName;
-        this.toLocationName = toLocationName;
-        this.vehicles = vehicles;
-    }
-
-    public RouteDto(String id, String scheduleId, Location fromLocation, Location toLocation, String fromLocationName, String toLocationName, List<Vehicle> vehicles) {
-        this.id = id;
-        this.scheduleId = scheduleId;
-        this.fromLocation = fromLocation;
-        this.toLocation = toLocation;
-        this.fromLocationName = fromLocationName;
-        this.toLocationName = toLocationName;
-        this.vehicles = vehicles;
     }
 
     public String getId() {
@@ -94,19 +78,33 @@ public class RouteDto {
         this.vehicles = vehicles;
     }
 
-//    public void addVehicle(Vehicle vehicle){
-//        this.vehicles.add(vehicle);
-//    }
+    public String getCounty() {
+        return county;
+    }
+
+    public void setCounty(String county) {
+        this.county = county;
+    }
+
+    public String getSubCounty() {
+        return subCounty;
+    }
+
+    public void setSubCounty(String subCounty) {
+        this.subCounty = subCounty;
+    }
 
     @Override
     public String toString() {
         return "RouteDto{" +
-                "id=" + id +
-                ", scheduleId=" + scheduleId +
+                "id='" + id + '\'' +
+                ", scheduleId='" + scheduleId + '\'' +
                 ", fromLocation=" + fromLocation +
                 ", toLocation=" + toLocation +
                 ", fromLocationName='" + fromLocationName + '\'' +
                 ", toLocationName='" + toLocationName + '\'' +
+                ", county='" + county + '\'' +
+                ", subCounty='" + subCounty + '\'' +
                 ", vehicles=" + vehicles +
                 '}';
     }

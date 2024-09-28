@@ -1,6 +1,8 @@
 package io.github.junrdev.bookingsys.model;
 
+import io.github.junrdev.bookingsys.model.enums.CLIENT_TYPE;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
@@ -25,11 +27,18 @@ public class Client {
 
     private Location location;
 
-    private String locationName;
-
     private Boolean isActive;
 
     private CLIENT_TYPE clientType;
+
+    private String locationName;
+
+    @DBRef
+    private County county;
+
+    @DBRef
+    private SubCounty subCounty;
+
 
     public CLIENT_TYPE getClientType() {
         return clientType;
@@ -39,17 +48,13 @@ public class Client {
         this.clientType = clientType;
     }
 
-    private enum CLIENT_TYPE {
-        STAFF, USER
-    }
-
     public Client() {
         this.isActive = true;
         this.clientType = CLIENT_TYPE.USER;
         this.dateJoined = LocalDate.now();
     }
 
-    public Client(String id, String fullName, String identification, Kyc kyc, LocalDate dateJoined, String email, String phone, Location location, String locationName, Boolean isActive, CLIENT_TYPE clientType) {
+    public Client(String id, String fullName, String identification, Kyc kyc, LocalDate dateJoined, String email, String phone, Location location, Boolean isActive, CLIENT_TYPE clientType, String locationName, County county, SubCounty subCounty) {
         this.id = id;
         this.fullName = fullName;
         this.identification = identification;
@@ -58,22 +63,11 @@ public class Client {
         this.email = email;
         this.phone = phone;
         this.location = location;
-        this.locationName = locationName;
         this.isActive = isActive;
         this.clientType = clientType;
-    }
-
-    public Client(String fullName, String identification, Kyc kyc, LocalDate dateJoined, String email, String phone, Location location, String locationName, Boolean isActive, CLIENT_TYPE clientType) {
-        this.fullName = fullName;
-        this.identification = identification;
-        this.kyc = kyc;
-        this.dateJoined = dateJoined;
-        this.email = email;
-        this.phone = phone;
-        this.location = location;
         this.locationName = locationName;
-        this.isActive = isActive;
-        this.clientType = clientType;
+        this.county = county;
+        this.subCounty = subCounty;
     }
 
     public String getId() {
@@ -156,6 +150,22 @@ public class Client {
         this.locationName = locationName;
     }
 
+    public County getCounty() {
+        return county;
+    }
+
+    public void setCounty(County county) {
+        this.county = county;
+    }
+
+    public SubCounty getSubCounty() {
+        return subCounty;
+    }
+
+    public void setSubCounty(SubCounty subCounty) {
+        this.subCounty = subCounty;
+    }
+
     @Override
     public String toString() {
         return "Client{" +
@@ -167,9 +177,11 @@ public class Client {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", location=" + location +
-                ", locationName='" + locationName + '\'' +
                 ", isActive=" + isActive +
                 ", clientType=" + clientType +
+                ", locationName='" + locationName + '\'' +
+                ", county=" + county +
+                ", subCounty=" + subCounty +
                 '}';
     }
 }

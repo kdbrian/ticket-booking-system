@@ -2,6 +2,7 @@ package io.github.junrdev.bookingsys.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -35,19 +36,16 @@ public class Company {
 
     private List<String> images;
 
+    @DBRef
+    private County county;
+
+    @DBRef
+    private SubCounty subCounty;
+
     public Company() {
     }
 
-    public Company(String fullName, String email, String phone, Location location, String locationArea, List<String> images) {
-        this.fullName = fullName;
-        this.email = email;
-        this.phone = phone;
-        this.location = location;
-        this.locationArea = locationArea;
-        this.images = images;
-    }
-
-    public Company(String id, String fullName, Kyc kyc, Date dateJoined, String email, String phone, Location location, String locationArea, Boolean isActive, List<String> images) {
+    public Company(String id, String fullName, Kyc kyc, Date dateJoined, String email, String phone, Location location, String locationArea, Boolean isActive, List<String> images, County county, SubCounty subCounty) {
         this.id = id;
         this.fullName = fullName;
         this.kyc = kyc;
@@ -58,18 +56,8 @@ public class Company {
         this.locationArea = locationArea;
         this.isActive = isActive;
         this.images = images;
-    }
-
-    public Company(String fullName, Kyc kyc, Date dateJoined, String email, String phone, Location location, String locationArea, Boolean isActive, List<String> images) {
-        this.fullName = fullName;
-        this.kyc = kyc;
-        this.dateJoined = dateJoined;
-        this.email = email;
-        this.phone = phone;
-        this.location = location;
-        this.locationArea = locationArea;
-        this.isActive = isActive;
-        this.images = images;
+        this.county = county;
+        this.subCounty = subCounty;
     }
 
     public String getId() {
@@ -161,10 +149,26 @@ public class Company {
         }
     }
 
+    public County getCounty() {
+        return county;
+    }
+
+    public void setCounty(County county) {
+        this.county = county;
+    }
+
+    public SubCounty getSubCounty() {
+        return subCounty;
+    }
+
+    public void setSubCounty(SubCounty subCounty) {
+        this.subCounty = subCounty;
+    }
+
     @Override
     public String toString() {
         return "Company{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", kyc=" + kyc +
                 ", dateJoined=" + dateJoined +
@@ -174,6 +178,8 @@ public class Company {
                 ", locationArea='" + locationArea + '\'' +
                 ", isActive=" + isActive +
                 ", images=" + images +
+                ", county=" + county +
+                ", subCounty=" + subCounty +
                 '}';
     }
 }

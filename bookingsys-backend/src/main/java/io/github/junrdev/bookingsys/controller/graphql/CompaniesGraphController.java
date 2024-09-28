@@ -3,6 +3,7 @@ package io.github.junrdev.bookingsys.controller.graphql;
 import io.github.junrdev.bookingsys.domain.dto.CompanyDto;
 import io.github.junrdev.bookingsys.model.Company;
 import io.github.junrdev.bookingsys.service.CompanyService;
+import io.github.junrdev.bookingsys.util.mappers.CompanyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -17,10 +18,12 @@ import java.util.List;
 public class CompaniesGraphController {
 
     private final CompanyService companyService;
+    private final CompanyMapper companyMapper;
 
     @Autowired
-    public CompaniesGraphController(CompanyService companyService) {
+    public CompaniesGraphController(CompanyService companyService, CompanyMapper companyMapper) {
         this.companyService = companyService;
+        this.companyMapper = companyMapper;
     }
 
     @QueryMapping
@@ -30,7 +33,8 @@ public class CompaniesGraphController {
 
     @MutationMapping
     public Company createCompany(@Argument CompanyDto dto) {
-        return companyService.saveCompany(new Company(dto.fullName(), dto.email(), dto.phone(), dto.location(), dto.locationArea(), dto.images()));
+        Company company = companyMapper.companyDToCompany(dto);
+        return companyService.saveCompany(company);
     }
 
     @MutationMapping

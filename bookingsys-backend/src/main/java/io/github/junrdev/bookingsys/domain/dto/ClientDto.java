@@ -12,6 +12,8 @@ public class ClientDto {
     private String phone;
     private Location location;
     private Kyc kyc ;
+    private String county;
+    private String subCounty;
 
     public ClientDto() {
     }
