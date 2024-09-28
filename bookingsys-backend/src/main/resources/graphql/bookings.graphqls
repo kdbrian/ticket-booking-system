@@ -2,7 +2,7 @@ type Booking{
     id : ID,
     client : Client,
     vehicle : Vehicle,
-    seats : [Seat],
+    seats : [Seat!],
     isActive : Boolean,
     bookingDate : String,
     BOOKINGSTATUS : BookingStatus,
@@ -13,7 +13,7 @@ type Booking{
 input BookingDto {
     clientId : String,
     vehicleId : String,
-    seats : [SeatDto],
+    seats : [SeatDto!],
     isActive : Boolean,
     bookingDate : String,
     BOOKINGSTATUS : BookingStatus,

@@ -10,6 +10,7 @@ type Client{
     dateJoined : String,
     kyc : Kyc,
     county:County,
+    locationName:String,
     subCounty:SubCounty
 }
 
