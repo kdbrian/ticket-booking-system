@@ -7,3 +7,8 @@ type SubCounty{
     countyNumber : Int,
     subCountyName : String
 }
+
+type UnifiedLocationCountySubCounty{
+    county:County!,
+    subCounty : SubCounty!
+}

@@ -55,17 +55,17 @@ type Mutation {
 
     #routes
     saveRoute(dto : RouteDto!) : Route
-    deleteRoute(id : ID) : Boolean
+    deleteRoute(id : ID!) : Boolean
 
     #vehicles
     saveVehicle(dto: VehicleDto!) : Vehicle
-    updateVehicle(id :ID, dto : VehicleDto) : Vehicle
-    deleteVehicle(id: ID) : Boolean
+    updateVehicle(id :ID!, dto : VehicleDto) : Vehicle
+    deleteVehicle(id: ID!) : Boolean
 
     #bookings
     saveBooking(dto : BookingDto!) : Booking
-    cancelBooking(bookingId : String) : Booking
-    deleteBooking(bookingId : String) : Boolean
+    cancelBooking(bookingId : String!) : Booking
+    deleteBooking(bookingId : String!) : Boolean
 
 }
 

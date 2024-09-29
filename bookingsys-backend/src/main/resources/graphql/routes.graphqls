@@ -9,20 +9,14 @@ type Route{
     toLocationCountySubCounty : UnifiedLocationCountySubCounty
 }
 
-type UnifiedLocationCountySubCounty{
-    county:County!,
-    subCounty : SubCounty!
-}
-
-
 input RouteDto{
     scheduleId : String!,
     fromLocation : LocationDto,
     toLocation : LocationDto,
     fromLocationName : String,
-    toLocationName : String
-    fromsubCountyName : String,
-    fromcountyName : String,
-    tosubCountyName : String,
-    tocountyName : String
+    toLocationName : String,
+    fromSubCountyName : String,
+    fromCountyName : String,
+    toSubCountyName : String,
+    toCountyName : String
 }

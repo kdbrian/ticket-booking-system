@@ -40,7 +40,7 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public Route saveRoute(RouteDto dto) {
-        log.info("dto {}", dto);
+
         Route route = routeMapper.routeDtoToRoute(dto);
         return scheduleRepository.findById(dto.getScheduleId())
                 .map(schedule -> {
