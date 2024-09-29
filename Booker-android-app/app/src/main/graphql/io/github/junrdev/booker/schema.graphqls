@@ -11,13 +11,13 @@ type Booking {
 
   vehicle: Vehicle
 
-  seats: [Seat]
+  seats: [Seat!]
 
   isActive: Boolean
 
   bookingDate: String
 
-  bookingStatus: BookingStatus
+  BOOKINGSTATUS: BookingStatus
 
   bookingType: BOOKING_TYPE
 
@@ -29,13 +29,13 @@ input BookingDto {
 
   vehicleId: String
 
-  seats: [SeatDto]
+  seats: [SeatDto!]
 
   isActive: Boolean
 
   bookingDate: String
 
-  bookingStatus: BookingStatus
+  BOOKINGSTATUS: BookingStatus
 
   bookingType: BOOKING_TYPE
 
@@ -72,6 +72,12 @@ type Client {
   dateJoined: String
 
   kyc: Kyc
+
+  county: County
+
+  locationName: String
+
+  subCounty: SubCounty
 }
 
 input ClientDto {
@@ -84,6 +90,10 @@ input ClientDto {
   location: LocationDto
 
   clientType: ClientType
+
+  subCounty: String
+
+  county: String
 }
 
 enum ClientType {
@@ -110,20 +120,28 @@ type Company {
   locationArea: String
 
   location: Location
+
+  subCountyName: String
+
+  countyName: String
 }
 
 input CompanyDto {
-  fullName: String
+  fullName: String!
 
-  email: String
+  email: String!
 
-  phone: String
+  phone: String!
 
   location: LocationDto
 
   images: [String]
 
   locationArea: String
+
+  subCountyName: String
+
+  countyName: String
 }
 
 type County {
@@ -194,9 +212,9 @@ type Mutation {
   """
   saveBooking(dto: BookingDto!): Booking
 
-  deleteBooking(bookingId: String): Boolean
-
   cancelBooking(bookingId: String): Booking
+
+  deleteBooking(bookingId: String): Boolean
 }
 
 enum PAYMENT_STATUS {
@@ -232,6 +250,12 @@ type Query {
 
   getRouteById(id: ID!): Route!
 
+  getCountyRoutes(countyName: String!): [Booking]
+
+  getSubCountyRoutes(subCountyName: String!): [Booking]
+
+  getRegionRoutes(countyName: String!, subCountyName: String!): [Booking]
+
   """
   schedule
   """
@@ -246,7 +270,7 @@ type Query {
 
   getAllVehicles: [Vehicle!]
 
-  getVehiclesByRoute(routeId: String): [Vehicle!]
+  getVehiclesByRoute(routeId: String!): [Vehicle]
 
   """
   bookings
@@ -254,6 +278,10 @@ type Query {
   getBookingById(id: ID!): Booking!
 
   getAllBookings: [Booking!]
+
+  getClientBookings(clientId: ID!): [Booking!]
+
+  getVehicleBookings(vehicleId: ID!): [Booking!]
 
   """
   locations
@@ -279,10 +307,14 @@ type Route {
   toLocationName: String
 
   vehicles: [Vehicle]
+
+  subCountyName: String
+
+  countyName: String
 }
 
 input RouteDto {
-  scheduleId: String
+  scheduleId: String!
 
   fromLocation: LocationDto
 
@@ -291,6 +323,10 @@ input RouteDto {
   fromLocationName: String
 
   toLocationName: String
+
+  subCountyName: String!
+
+  countyName: String!
 }
 
 type Schedule {
@@ -349,6 +385,8 @@ type Vehicle {
   additionalInfo: [String!]
 
   timeOfTravel: Float
+
+  updateslug: Float
 }
 
 input VehicleDto {

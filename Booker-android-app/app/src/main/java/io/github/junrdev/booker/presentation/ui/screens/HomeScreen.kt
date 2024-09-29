@@ -7,27 +7,26 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.datepicker.CalendarConstraints
-import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.junrdev.booker.R
 import io.github.junrdev.booker.databinding.FragmentHomeScreenBinding
 import io.github.junrdev.booker.presentation.adapter.CompanyListAdapter
 import io.github.junrdev.booker.presentation.adapter.RouteListAdapter
+import io.github.junrdev.booker.presentation.viewmodel.ClientsViewModel
 import io.github.junrdev.booker.presentation.viewmodel.CompaniesViewModel
 import io.github.junrdev.booker.presentation.viewmodel.LocationsViewModel
 import io.github.junrdev.booker.presentation.viewmodel.RoutesViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Date
-import java.util.Locale
 
 @AndroidEntryPoint
 class HomeScreen : Fragment() {
@@ -36,6 +35,9 @@ class HomeScreen : Fragment() {
     private val companiesViewModel by viewModels<CompaniesViewModel>()
     private val routesViewModel by viewModels<RoutesViewModel>()
     private val locationsViewModel by viewModels<LocationsViewModel>()
+    private val clientsViewModel by viewModels<ClientsViewModel>()
+
+
     private lateinit var selectedDate: Date
 
     override fun onCreateView(
@@ -159,6 +161,40 @@ class HomeScreen : Fragment() {
                 }
             }
 
+
+            CoroutineScope(Dispatchers.Main).launch {
+                clientsViewModel.getClientById("66f8665e122fe9352444b957")
+                clientsViewModel.clientUiState.collect { state ->
+
+                    if (state.isLoading) {
+                        textView7.text = "Please wait"
+                        textView8.text = "fetching account ...."
+                    }
+
+
+                    if (state.data != null) {
+                        delay(800L)
+                        val user = state.data.getClientById
+                        textView7.text = user.fullName
+                        textView8.text = user.identification
+                    }
+
+                    if (state.error != null) {
+                        textView8.apply {
+                            text = "failed retry later.."
+                            setTextColor(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color.light_blue_900
+                                )
+                            )
+                        }
+
+                    }
+
+                }
+            }
+
             switch1.setOnCheckedChangeListener { _, isChecked ->
                 editTextDate2.isEnabled = isChecked
             }
@@ -178,37 +214,6 @@ class HomeScreen : Fragment() {
                 findNavController().navigate(R.id.action_homeScreen_to_companiesScreen)
             }
         }
-    }
-
-    private fun showDatePicker() {
-        val calendar = Calendar.getInstance()
-        val currentDateInMillis = calendar.timeInMillis
-
-        val constraintsBuilder = CalendarConstraints.Builder()
-            .setStart(currentDateInMillis)
-
-        val datePicker = MaterialDatePicker.Builder.datePicker()
-            .setCalendarConstraints(constraintsBuilder.build())
-            .build()
-
-        datePicker.addOnPositiveButtonClickListener { selection ->
-            // selection is the picked date in milliseconds
-            val selectedDateInMillis = selection ?: 0L
-
-            // Convert the milliseconds to a readable date format
-            val selectedCalendar = Calendar.getInstance()
-            selectedCalendar.timeInMillis = selectedDateInMillis
-            selectedDate = selectedCalendar.time
-            binding.editTextDate2.setText(
-                (SimpleDateFormat(
-                    "yyyy-MM-dd",
-                    Locale.getDefault()
-                )).format(selectedDate)
-            )
-            binding.editTextDate2.clearFocus()
-
-        }
-        datePicker.show(parentFragmentManager, datePicker.toString())
     }
 
 }

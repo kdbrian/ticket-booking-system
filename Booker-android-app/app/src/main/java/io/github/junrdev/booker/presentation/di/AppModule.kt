@@ -7,16 +7,19 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.github.junrdev.booker.data.repo.BookingRepoImpl
+import io.github.junrdev.booker.data.repo.ClientsRepoImpl
 import io.github.junrdev.booker.data.repo.CompaniesRepoImpl
 import io.github.junrdev.booker.data.repo.LocationsRepoImpl
 import io.github.junrdev.booker.data.repo.RouteRepoImpl
 import io.github.junrdev.booker.data.repo.SchedulesRepoImpl
 import io.github.junrdev.booker.domain.repo.BookingRepo
+import io.github.junrdev.booker.domain.repo.ClientsRepo
 import io.github.junrdev.booker.domain.repo.CompaniesRepo
 import io.github.junrdev.booker.domain.repo.LocationsRepo
 import io.github.junrdev.booker.domain.repo.RouteRepo
 import io.github.junrdev.booker.domain.repo.SchedulesRepo
 import io.github.junrdev.booker.domain.use_cases.BookingsUseCase
+import io.github.junrdev.booker.domain.use_cases.ClientsUseCase
 import io.github.junrdev.booker.domain.use_cases.CompaniesUseCase
 import io.github.junrdev.booker.domain.use_cases.LocationsUseCase
 import io.github.junrdev.booker.domain.use_cases.RoutesUseCase
@@ -75,6 +78,12 @@ object AppModule {
         return LocationsRepoImpl(apolloClient)
     }
 
+    @Provides
+    @Singleton
+    fun providesClientRepository(apolloClient: ApolloClient) : ClientsRepo{
+        return ClientsRepoImpl(apolloClient)
+    }
+
     //use cases
 
     @Singleton
@@ -100,6 +109,13 @@ object AppModule {
     @Singleton
     fun providesLocationsUseCase(locationsRepo: LocationsRepo) : LocationsUseCase{
         return LocationsUseCase(locationsRepo)
+    }
+
+
+    @Provides
+    @Singleton
+    fun providesClientsUseCase(clientsRepo: ClientsRepo) : ClientsUseCase{
+        return ClientsUseCase(clientsRepo)
     }
 
 }

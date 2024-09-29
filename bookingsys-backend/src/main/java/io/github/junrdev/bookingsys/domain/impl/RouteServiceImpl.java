@@ -4,6 +4,7 @@ import io.github.junrdev.bookingsys.domain.dto.RouteDto;
 import io.github.junrdev.bookingsys.model.County;
 import io.github.junrdev.bookingsys.model.Route;
 import io.github.junrdev.bookingsys.model.SubCounty;
+import io.github.junrdev.bookingsys.model.UnifiedLocationCountySubCounty;
 import io.github.junrdev.bookingsys.repository.CountyRepository;
 import io.github.junrdev.bookingsys.repository.RouteRepository;
 import io.github.junrdev.bookingsys.repository.ScheduleRepository;
@@ -43,14 +44,35 @@ public class RouteServiceImpl implements RouteService {
         Route route = routeMapper.routeDtoToRoute(dto);
         return scheduleRepository.findById(dto.getScheduleId())
                 .map(schedule -> {
-                    County county = countyRepository.findByCountyNameContains(dto.getCountyName())
-                            .orElseThrow(() -> new NotFoundException("County " + dto.getCountyName() + " not found."));
 
-                    SubCounty subCounty = subCountyRepository.findBySubCountyName(dto.getSubCountyName())
-                            .orElseThrow(() -> new NotFoundException("Sub-County " + dto.getSubCountyName() + " not found."));
+                    // all are optional
+                    County fromcounty = null;
+                    if (dto.getFromCountyName() != null)
+                        fromcounty = countyRepository.findByCountyNameContains(dto.getFromCountyName())
+                                .orElseThrow(() -> new NotFoundException("County " + dto.getFromCountyName() + " not found."));
 
-                    route.setCounty(county);
-                    route.setSubCounty(subCounty);
+                    County toCounty = null;
+                    if (dto.getToCountyName() != null)
+                        toCounty = countyRepository.findByCountyNameContains(dto.getToCountyName())
+                                .orElseThrow(() -> new NotFoundException("County " + dto.getToCountyName() + " not found."));
+
+                    SubCounty fromSubCounty = null;
+                    if (dto.getFromSubCountyName() != null)
+                        fromSubCounty = subCountyRepository.findBySubCountyName(dto.getFromSubCountyName())
+                                .orElseThrow(() -> new NotFoundException("Sub-County " + dto.getFromSubCountyName() + " not found."));
+
+                    SubCounty toSubCounty = null;
+                    if (dto.getToSubCountyName() != null)
+                        toSubCounty = subCountyRepository.findBySubCountyName(dto.getToSubCountyName())
+                                .orElseThrow(() -> new NotFoundException("Sub-County " + dto.getToSubCountyName() + " not found."));
+
+                    //set unified fields -> might be nulls
+                    route.setFromLocationCountySubCounty(
+                            new UnifiedLocationCountySubCounty(fromcounty, fromSubCounty)
+                    );
+                    route.setToLocationCountySubCounty(
+                            new UnifiedLocationCountySubCounty(toCounty, toSubCounty)
+                    );
 
                     route.setSchedule(schedule);
                     Route saved = routeRepository.save(route);
@@ -93,7 +115,12 @@ public class RouteServiceImpl implements RouteService {
         County county = countyRepository.findByCountyNameContains(countyName)
                 .orElseThrow(() -> new NotFoundException("County " + countyName + " not found."));
 
-        return routeRepository.findByCounty(county);
+        return routeRepository.findAll()
+                .stream()
+                .filter(route ->
+                        route.getFromLocationCountySubCounty().county().equals(county) ||
+                                route.getToLocationCountySubCounty().county().equals(county)
+                ).toList();
     }
 
     @Override
@@ -101,7 +128,12 @@ public class RouteServiceImpl implements RouteService {
         SubCounty subCounty = subCountyRepository.findBySubCountyName(subCountyName)
                 .orElseThrow(() -> new NotFoundException("Sub-County " + subCountyName + " not found."));
 
-        return routeRepository.findBySubCounty(subCounty);
+        return routeRepository.findAll()
+                .stream()
+                .filter(route ->
+                        route.getFromLocationCountySubCounty().subCounty().equals(subCounty) ||
+                                route.getToLocationCountySubCounty().subCounty().equals(subCounty)
+                ).toList();
     }
 
     @Override
@@ -113,7 +145,14 @@ public class RouteServiceImpl implements RouteService {
         SubCounty subCounty = subCountyRepository.findBySubCountyName(subCountyName)
                 .orElseThrow(() -> new NotFoundException("County " + countyName + " not found."));
 
-        return routeRepository.findByCountyAndSubCounty(county, subCounty);
+        return routeRepository.findAll()
+                .stream()
+                .filter(route ->
+                        route.getFromLocationCountySubCounty().subCounty().equals(subCounty) ||
+                                route.getFromLocationCountySubCounty().county().equals(county) ||
+                                route.getToLocationCountySubCounty().county().equals(county) ||
+                                route.getToLocationCountySubCounty().subCounty().equals(subCounty)
+                ).toList();
     }
 
 }

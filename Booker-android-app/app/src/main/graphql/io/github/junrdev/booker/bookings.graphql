@@ -1,7 +1,7 @@
 query GetBookings{
     getAllBookings {
         id
-        bookingStatus
+        BOOKINGSTATUS
         bookingDate
         bookingType
         paymentStatus
@@ -32,7 +32,7 @@ query GetBookingById($id : ID!){
         isActive
         bookingDate
         bookingType
-        bookingStatus
+        BOOKINGSTATUS
     }
 }
 
@@ -48,6 +48,6 @@ mutation SaveBooking (
         isActive
         bookingDate
         bookingType
-        bookingStatus
+        BOOKINGSTATUS
     }
 }

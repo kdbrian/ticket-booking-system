@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface RouteRepository extends MongoRepository<Route, String> {
 
-    List<Route> findByCounty(County county);
-
-    List<Route> findBySubCounty(SubCounty subCounty);
-
-    List<Route> findByCountyAndSubCounty(County county, SubCounty subCounty);
+//    List<Route> findByCounty(County county);
+//
+//    List<Route> findBySubCounty(SubCounty subCounty);
+//
+//    List<Route> findByCountyAndSubCounty(County county, SubCounty subCounty);
 }

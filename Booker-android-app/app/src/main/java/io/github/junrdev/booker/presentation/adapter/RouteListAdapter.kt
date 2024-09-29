@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.junrdev.booker.R
 import io.github.junrdev.booker.databinding.RouteitemBinding
 import src.main.graphql.GetAllRoutesQuery
+import java.util.Date
 
 class RouteListAdapter(
     val routes: GetAllRoutesQuery.Data,
@@ -16,9 +17,7 @@ class RouteListAdapter(
     inner class VH(val view: View) : RecyclerView.ViewHolder(view) {
 
         fun bindItem(currentRoute: GetAllRoutesQuery.GetAllRoute) {
-            view.apply {
-                RouteitemBinding.bind(view).also { it.route = currentRoute }
-            }
+            RouteitemBinding.bind(view).also { it.route = currentRoute }
         }
     }
 

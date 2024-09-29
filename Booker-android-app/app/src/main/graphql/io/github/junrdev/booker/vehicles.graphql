@@ -29,7 +29,7 @@ query FetchVehicleById($id : ID!){
 
 }
 
-query FetchVehiclesByRoute($routeId : String){
+query FetchVehiclesByRoute($routeId : String!){
 
     getVehiclesByRoute(routeId: $routeId){
         vehicleId

@@ -5,8 +5,13 @@ type Route{
     fromLocationName : String,
     toLocationName : String,
     vehicles : [Vehicle],
-    subCountyName : String,
-    countyName : String
+    fromLocationCountySubCounty : UnifiedLocationCountySubCounty,
+    toLocationCountySubCounty : UnifiedLocationCountySubCounty
+}
+
+type UnifiedLocationCountySubCounty{
+    county:County!,
+    subCounty : SubCounty!
 }
 
 
@@ -16,6 +21,8 @@ input RouteDto{
     toLocation : LocationDto,
     fromLocationName : String,
     toLocationName : String
-    subCountyName : String!,
-    countyName : String!
+    fromsubCountyName : String,
+    fromcountyName : String,
+    tosubCountyName : String,
+    tocountyName : String
 }

@@ -124,8 +124,10 @@
                                 android:id="@+id/routeList"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                                 android:layout_weight="1"
+                                android:clipToPadding="false"
+                                android:padding="5dp"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                                 tools:itemCount="2"
                                 tools:listitem="@layout/routeitem" />
 
@@ -135,8 +137,8 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ubuntu"
                                 android:padding="8dp"
-                                android:text="Flight date"
-                                android:textSize="16sp"
+                                android:text="Travel date"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <LinearLayout
@@ -144,7 +146,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="8dp"
                                 android:background="@drawable/roundedshapedstroked12dp"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:padding="12dp">
 
                                 <EditText
                                     android:id="@+id/editTextDate2"
@@ -186,7 +189,8 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="8dp"
-                                    android:background="@drawable/roundedshapedstroked12dp" />
+                                    android:background="@drawable/roundedshapedstroked12dp"
+                                    android:padding="12dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -217,7 +221,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="8dp"
-                                        android:background="@drawable/roundedshapedstroked12dp" />
+                                        android:background="@drawable/roundedshapedstroked12dp"
+                                        android:padding="12dp" />
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -240,7 +245,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="8dp"
-                                        android:background="@drawable/roundedshapedstroked12dp" />
+                                        android:background="@drawable/roundedshapedstroked12dp"
+                                        android:padding="12dp" />
                                 </LinearLayout>
 
                             </LinearLayout>

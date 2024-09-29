@@ -14,8 +14,12 @@ public class RouteDto {
     private Location toLocation;
     private String fromLocationName;
     private String toLocationName;
-    private String countyName;
-    private String subCountyName;
+
+    private String fromCountyName;
+    private String fromSubCountyName;
+
+    private String toCountyName;
+    private String toSubCountyName;
 
     private List<VehicleDto> vehicles = new ArrayList<>();
 
@@ -78,24 +82,36 @@ public class RouteDto {
         this.vehicles = vehicles;
     }
 
-    public String getCountyName() {
-        return countyName;
+    public String getFromCountyName() {
+        return fromCountyName;
     }
 
-    public void setCountyName(String countyName) {
-        this.countyName = countyName;
+    public void setFromCountyName(String fromCountyName) {
+        this.fromCountyName = fromCountyName;
     }
 
-    public String getSubCountyName() {
-        return subCountyName;
+    public String getFromSubCountyName() {
+        return fromSubCountyName;
     }
 
-    public void setSubCountyName(String subCountyName) {
-        this.subCountyName = subCountyName;
+    public void setFromSubCountyName(String fromSubCountyName) {
+        this.fromSubCountyName = fromSubCountyName;
     }
 
-    public void setSubCounty(String subCounty) {
-        this.subCountyName = subCounty;
+    public String getToCountyName() {
+        return toCountyName;
+    }
+
+    public void setToCountyName(String toCountyName) {
+        this.toCountyName = toCountyName;
+    }
+
+    public String getToSubCountyName() {
+        return toSubCountyName;
+    }
+
+    public void setToSubCountyName(String toSubCountyName) {
+        this.toSubCountyName = toSubCountyName;
     }
 
     @Override
@@ -107,9 +123,12 @@ public class RouteDto {
                 ", toLocation=" + toLocation +
                 ", fromLocationName='" + fromLocationName + '\'' +
                 ", toLocationName='" + toLocationName + '\'' +
-                ", county='" + countyName + '\'' +
-                ", subCounty='" + subCountyName + '\'' +
+                ", fromCountyName='" + fromCountyName + '\'' +
+                ", fromSubCountyName='" + fromSubCountyName + '\'' +
+                ", toCountyName='" + toCountyName + '\'' +
+                ", toSubCountyName='" + toSubCountyName + '\'' +
                 ", vehicles=" + vehicles +
                 '}';
     }
+
 }

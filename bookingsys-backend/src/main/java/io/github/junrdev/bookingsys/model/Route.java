@@ -24,11 +24,11 @@ public class Route {
 
     private String toLocationName;
 
-    @DBRef
-    private County county;
+    //from county A subcounty Z
+    private UnifiedLocationCountySubCounty fromLocationCountySubCounty;
 
-    @DBRef
-    private SubCounty subCounty;
+    //to county B subcounty Y
+    private UnifiedLocationCountySubCounty toLocationCountySubCounty;
 
     @DBRef
     transient private Schedule schedule;
@@ -36,18 +36,6 @@ public class Route {
     private List<Vehicle> vehicles = new ArrayList<>();
 
     public Route() {
-    }
-
-    public Route(String id, Location fromLocation, Location toLocation, String fromLocationName, String toLocationName, County county, SubCounty subCounty, Schedule schedule, List<Vehicle> vehicles) {
-        this.id = id;
-        this.fromLocation = fromLocation;
-        this.toLocation = toLocation;
-        this.fromLocationName = fromLocationName;
-        this.toLocationName = toLocationName;
-        this.county = county;
-        this.subCounty = subCounty;
-        this.schedule = schedule;
-        this.vehicles = vehicles;
     }
 
     public String getId() {
@@ -113,20 +101,20 @@ public class Route {
         this.vehicles.add(vehicle);
     }
 
-    public County getCounty() {
-        return county;
+    public UnifiedLocationCountySubCounty getFromLocationCountySubCounty() {
+        return fromLocationCountySubCounty;
     }
 
-    public void setCounty(County county) {
-        this.county = county;
+    public void setFromLocationCountySubCounty(UnifiedLocationCountySubCounty fromLocationCountySubCounty) {
+        this.fromLocationCountySubCounty = fromLocationCountySubCounty;
     }
 
-    public SubCounty getSubCounty() {
-        return subCounty;
+    public UnifiedLocationCountySubCounty getToLocationCountySubCounty() {
+        return toLocationCountySubCounty;
     }
 
-    public void setSubCounty(SubCounty subCounty) {
-        this.subCounty = subCounty;
+    public void setToLocationCountySubCounty(UnifiedLocationCountySubCounty toLocationCountySubCounty) {
+        this.toLocationCountySubCounty = toLocationCountySubCounty;
     }
 
     @Override
@@ -137,8 +125,8 @@ public class Route {
                 ", toLocation=" + toLocation +
                 ", fromLocationName='" + fromLocationName + '\'' +
                 ", toLocationName='" + toLocationName + '\'' +
-                ", county=" + county +
-                ", subCounty=" + subCounty +
+                ", fromLocationCountySubCounty=" + fromLocationCountySubCounty +
+                ", toLocationCountySubCounty=" + toLocationCountySubCounty +
                 ", schedule=" + schedule +
                 ", vehicles=" + vehicles +
                 '}';

@@ -4,16 +4,6 @@ query GetAllRoutes{
         id
         fromLocationName
         toLocationName
-        vehicles {
-            leavingTime
-            seats {
-                seatNo
-                isOccupied
-            }
-            price
-            seatCount
-            vehicleId
-        }
     }
 }
 

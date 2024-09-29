@@ -9,13 +9,25 @@ import org.mapstruct.Mapping;
 public interface RouteMapper {
 
     @Mapping(source = "schedule.id", target = "scheduleId")
-    @Mapping(source = "county.countyName", target = "countyName")  // Fix field reference
-    @Mapping(source = "subCounty.subCountyName", target = "subCounty")  // Fix field reference
+
+    //from unified
+    @Mapping(source = "fromLocationCountySubCounty.county.countyName", target = "fromCountyName")
+    @Mapping(source = "fromLocationCountySubCounty.subCounty.subCountyName", target = "fromSubCountyName")
+
+    //to unified
+    @Mapping(source = "toLocationCountySubCounty.county.countyName", target = "toCountyName")
+    @Mapping(source = "toLocationCountySubCounty.subCounty.subCountyName", target = "toSubCountyName")
     RouteDto routeToRouteDto(Route route);
 
     @Mapping(source = "scheduleId", target = "schedule.id")
-    @Mapping(source = "countyName", target = "county.countyName")  // Reverse mapping for county name
-    @Mapping(source = "subCountyName", target = "subCounty.subCountyName")  // Reverse mapping for sub-county name
+
+    //from
+    @Mapping(source = "fromCountyName", target = "fromLocationCountySubCounty.county.countyName")
+    @Mapping(source = "fromSubCountyName", target = "fromLocationCountySubCounty.subCounty.subCountyName")
+
+    //to
+    @Mapping(source = "toCountyName", target = "toLocationCountySubCounty.county.countyName")
+    @Mapping(source = "toSubCountyName", target = "toLocationCountySubCounty.subCounty.subCountyName")
     Route routeDtoToRoute(RouteDto routeDto);
 }
 
