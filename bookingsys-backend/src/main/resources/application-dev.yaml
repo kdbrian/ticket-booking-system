@@ -6,8 +6,8 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/bookingdb2
-      database: bookingdb2
+      uri: mongodb://localhost:27017/bookingdb3
+      database: bookingdb3
 
 
   graphql:
