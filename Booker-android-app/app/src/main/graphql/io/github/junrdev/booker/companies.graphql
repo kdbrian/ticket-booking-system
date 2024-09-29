@@ -3,9 +3,10 @@ query FetchCompanies{
         id
         fullName
         email
-        images
-        isActive
-        dateJoined
+        locationArea
+        countyName
+        subCountyName
+        phone
     }
 }
 

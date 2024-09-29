@@ -15,6 +15,17 @@
             >
 
 
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="14dp"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:menu="@menu/sortmenu"
+                app:navigationIcon="@drawable/round_arrow_back_ios_new_24"
+                app:title="Available companies" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/companyList"
                 android:layout_width="match_parent"

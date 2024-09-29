@@ -14,10 +14,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="8dp"
         android:backgroundTint="#E6E5E5"
         android:background="@drawable/roundedshaped"
-        android:elevation="8dp">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:fontFamily="@font/ubunturegular"
-                            android:text='@{company.fullName}'
+                            android:text='@{company.locationArea!=null?company.locationArea : company.subCountyName != null? company.subCountyName +", "+company.countyName:""}'
                             android:textSize="14sp"
                             tools:text="TextView" />
 
@@ -67,7 +67,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ubunturegular"
-                            android:text='@{company.email}'
+                            android:text='@{company.phone}'
                             tools:text="TextView" />
 
                     </LinearLayout>

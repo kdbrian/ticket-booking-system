@@ -25,6 +25,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import src.main.graphql.type.County
+import src.main.graphql.type.SubCounty
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -39,6 +41,8 @@ class HomeScreen : Fragment() {
 
 
     private lateinit var selectedDate: Date
+    var county: County? = null
+    var subCounty: SubCounty? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,19 +57,37 @@ class HomeScreen : Fragment() {
 
         binding.apply {
 
+            val fromSubCountyClickListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    p0: AdapterView<*>?,
+                    p1: View?,
+                    p2: Int,
+                    p3: Long
+                ) {
+                    val sub = p0?.getItemAtPosition(p2).toString()
+                    val subCountySelect = locationsViewModel.subcountiesByNameUiState.value.data?.getSubCountiesByCountyName?.firstOrNull { it.subCountyName == sub }
+                    println(
+                        "sub $sub\n"+
+                                "subse $subCountySelect"
+                    )
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }
+            }
+
+
             CoroutineScope(Dispatchers.Main).launch {
                 routesViewModel.routesUiState.collect { state ->
                     if (state.isLoading) {
-                        swiperefresh.isRefreshing = true
                     }
 
                     if (state.data != null) {
-                        swiperefresh.isRefreshing = false
                         routeList.adapter = RouteListAdapter(state.data)
                     }
 
                     if (state.error != null) {
-                        swiperefresh.isRefreshing = false
                         Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                     }
 
@@ -76,11 +98,9 @@ class HomeScreen : Fragment() {
             CoroutineScope(Dispatchers.Main).launch {
                 locationsViewModel.countiesUiState.collect { state ->
                     if (state.isLoading) {
-                        swiperefresh.isRefreshing = true
                     }
 
                     if (state.data != null) {
-                        swiperefresh.isRefreshing = false
                         val counties = state.data.getCounties!!
 
                         spinner5.adapter = ArrayAdapter(
@@ -110,7 +130,6 @@ class HomeScreen : Fragment() {
                     }
 
                     if (state.error != null) {
-                        swiperefresh.isRefreshing = false
                         Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -120,23 +139,24 @@ class HomeScreen : Fragment() {
             CoroutineScope(Dispatchers.Main).launch {
                 locationsViewModel.subcountiesByNameUiState.collect { state ->
                     if (state.isLoading) {
-                        swiperefresh.isRefreshing = true
                     }
 
                     if (state.data != null) {
-                        swiperefresh.isRefreshing = false
                         spinner.adapter = ArrayAdapter(
                             requireContext(),
                             android.R.layout.simple_spinner_item,
                             state.data.getSubCountiesByCountyName!!.map { it.subCountyName })
+
+                        spinner.onItemSelectedListener = fromSubCountyClickListener
                         spinner2.adapter = ArrayAdapter(
                             requireContext(),
                             android.R.layout.simple_spinner_item,
                             state.data.getSubCountiesByCountyName.map { it.subCountyName })
+
+
                     }
 
                     if (state.error != null) {
-                        swiperefresh.isRefreshing = false
                         Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -145,16 +165,13 @@ class HomeScreen : Fragment() {
             CoroutineScope(Dispatchers.Main).launch {
                 companiesViewModel.allCompaniesUiState.collect { state ->
                     if (state.isLoading) {
-                        swiperefresh.isRefreshing = true
                     }
 
                     if (state.data != null) {
-                        swiperefresh.isRefreshing = false
                         availableCompanies.adapter = CompanyListAdapter(state.data)
                     }
 
                     if (state.error != null) {
-                        swiperefresh.isRefreshing = false
                         Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                     }
 
@@ -163,7 +180,7 @@ class HomeScreen : Fragment() {
 
 
             CoroutineScope(Dispatchers.Main).launch {
-                clientsViewModel.getClientById("66f8665e122fe9352444b957")
+                clientsViewModel.getClientById("66f89f805497c47c1fcb7660")
                 clientsViewModel.clientUiState.collect { state ->
 
                     if (state.isLoading) {
@@ -200,19 +217,28 @@ class HomeScreen : Fragment() {
             }
 
             editTextDate2.setOnClickListener {
-                println("Clicked")
                 findNavController().navigate(R.id.action_homeScreen_to_datePickerDialog)
             }
 
             setFragmentResultListener("date") { _, bundle ->
                 val pickedDate = bundle.getString("date")
                 val date = Date(Date.parse(pickedDate))
-                editTextDate2.setText(SimpleDateFormat.getInstance().format(date))
+                editTextDate2.apply {
+                    setText(SimpleDateFormat.getInstance().format(date))
+                    switch1.isChecked = true
+                }
             }
 
             textView14.setOnClickListener {
                 findNavController().navigate(R.id.action_homeScreen_to_companiesScreen)
             }
+
+
+            button.setOnClickListener {
+                findNavController().navigate(R.id.action_homeScreen_to_searchResults)
+            }
+
+
         }
     }
 

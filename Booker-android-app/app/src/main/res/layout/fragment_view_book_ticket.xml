@@ -315,7 +315,7 @@
                 android:layout_marginTop="12dp"
                 android:background="@drawable/roundedshapedstroked12dp"
                 android:orientation="horizontal"
-                android:padding="12dp">
+                android:padding="16dp">
 
                 <TextView
                     android:id="@+id/textView5"
@@ -351,6 +351,7 @@
                 android:padding="12dp"
                 app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
                 app:spanCount="4"
+                android:orientation="horizontal"
                 tools:listitem="@layout/seatitem" />
 
             <Button

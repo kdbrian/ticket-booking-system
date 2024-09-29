@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_searchResults_to_viewBookTicket"
             app:destination="@id/viewBookTicket" />
+        <action
+            android:id="@+id/action_searchResults_to_searchScreen"
+            app:destination="@id/searchScreen" />
     </fragment>
     <fragment
         android:id="@+id/viewBookTicket"
@@ -62,4 +65,9 @@
         android:name="io.github.junrdev.booker.presentation.ui.screens.DatePickerDialog"
         android:label="fragment_date_picker_dialog"
         tools:layout="@layout/fragment_date_picker_dialog" />
+    <fragment
+        android:id="@+id/searchScreen"
+        android:name="io.github.junrdev.booker.SearchScreen"
+        android:label="fragment_search_screen"
+        tools:layout="@layout/fragment_search_screen" />
 </navigation>

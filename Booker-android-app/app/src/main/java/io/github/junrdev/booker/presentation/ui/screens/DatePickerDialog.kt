@@ -17,7 +17,7 @@ class DatePickerDialog : DialogFragment() {
 
     private var _binding: FragmentDatePickerDialogBinding? = null
     private val binding get() = _binding
-    lateinit var pickedDate : Date
+    var pickedDate = Date()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,8 +34,9 @@ class DatePickerDialog : DialogFragment() {
         val calendar = Calendar.getInstance()
         var date: String? = null
         binding?.apply {
-            calendarView.minDate = calendar.timeInMillis
-            calendarView.setOnDateChangeListener { _, year, month, pickeddate ->
+
+            datePicker.minDate = calendar.timeInMillis
+            datePicker.setOnDateChangedListener { _, year, month, pickeddate ->
                 pickedDate = Date().apply {
                     setYear(year)
                     setMonth(month)

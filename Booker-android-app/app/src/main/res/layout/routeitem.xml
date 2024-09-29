@@ -38,7 +38,7 @@
                     android:background="@drawable/roundedshapedstroked12dp"
                     android:backgroundTint="@color/black_overlay"
                     android:fontFamily="@font/ubuntubold"
-                    android:text='@{route.fromLocationName}'
+                    android:text='@{route.fromLocationCountySubCounty.subCounty.subCountyName.toLowerCase()}'
                     android:textAlignment="center"
                     android:textSize="16sp"
                     tools:text="TextView" />
@@ -64,9 +64,9 @@
                     android:background="@drawable/roundedshapedstroked12dp"
                     android:backgroundTint="@color/black_overlay"
                     android:fontFamily="@font/ubuntubold"
-                    android:text='@{route.toLocationName}'
+                    android:text='@{route.toLocationCountySubCounty.subCounty.subCountyName.toLowerCase()}'
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     tools:text="TextView" />
             </LinearLayout>
 

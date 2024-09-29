@@ -2,8 +2,22 @@ query GetAllRoutes{
 
     getAllRoutes {
         id
-        fromLocationName
-        toLocationName
+        fromLocationCountySubCounty {
+            county {
+                countyName
+            }
+            subCounty {
+                subCountyName
+            }
+        }
+        toLocationCountySubCounty {
+            county {
+                countyName
+            }
+            subCounty {
+                subCountyName
+            }
+        }
     }
 }
 

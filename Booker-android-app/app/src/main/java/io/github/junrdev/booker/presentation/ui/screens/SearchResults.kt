@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.junrdev.booker.R
 import io.github.junrdev.booker.databinding.FragmentSearchResultsBinding
 
 @AndroidEntryPoint
@@ -20,6 +22,22 @@ class SearchResults : Fragment() {
         return FragmentSearchResultsBinding.inflate(inflater).also { binding = it }.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.apply {
+
+            imageView5.setOnClickListener{
+                findNavController().navigate(R.id.action_searchResults_to_searchScreen)
+            }
+
+            imageView4.setOnClickListener{
+                findNavController().popBackStack()
+            }
+
+
+        }
+    }
 
 
 }

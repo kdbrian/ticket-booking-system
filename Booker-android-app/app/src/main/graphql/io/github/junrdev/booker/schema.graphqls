@@ -196,25 +196,25 @@ type Mutation {
   """
   saveRoute(dto: RouteDto!): Route
 
-  deleteRoute(id: ID): Boolean
+  deleteRoute(id: ID!): Boolean
 
   """
   vehicles
   """
   saveVehicle(dto: VehicleDto!): Vehicle
 
-  updateVehicle(id: ID, dto: VehicleDto): Vehicle
+  updateVehicle(id: ID!, dto: VehicleDto): Vehicle
 
-  deleteVehicle(id: ID): Boolean
+  deleteVehicle(id: ID!): Boolean
 
   """
   bookings
   """
   saveBooking(dto: BookingDto!): Booking
 
-  cancelBooking(bookingId: String): Booking
+  cancelBooking(bookingId: String!): Booking
 
-  deleteBooking(bookingId: String): Boolean
+  deleteBooking(bookingId: String!): Boolean
 }
 
 enum PAYMENT_STATUS {
@@ -308,9 +308,9 @@ type Route {
 
   vehicles: [Vehicle]
 
-  subCountyName: String
+  fromLocationCountySubCounty: UnifiedLocationCountySubCounty
 
-  countyName: String
+  toLocationCountySubCounty: UnifiedLocationCountySubCounty
 }
 
 input RouteDto {
@@ -324,9 +324,13 @@ input RouteDto {
 
   toLocationName: String
 
-  subCountyName: String!
+  fromSubCountyName: String
 
-  countyName: String!
+  fromCountyName: String
+
+  toSubCountyName: String
+
+  toCountyName: String
 }
 
 type Schedule {
@@ -363,6 +367,12 @@ type SubCounty {
   countyNumber: Int
 
   subCountyName: String
+}
+
+type UnifiedLocationCountySubCounty {
+  county: County!
+
+  subCounty: SubCounty!
 }
 
 type Vehicle {
