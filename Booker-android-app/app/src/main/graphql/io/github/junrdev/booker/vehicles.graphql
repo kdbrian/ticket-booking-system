@@ -1,4 +1,4 @@
- query FetchVehicles{
+query FetchVehicles{
 
     getAllVehicles {
         vehicleId
@@ -43,3 +43,21 @@ query FetchVehiclesByRoute($routeId : String!){
         leavingTime
     }
 }
+
+query FetchVehiclesBookings($id : ID!){
+    getVehicleBookings(vehicleId: $id){
+        id
+        seats {
+            seatNo
+            isOccupied
+        }
+        BOOKINGSTATUS
+        bookingType
+        bookingDate
+        client {
+            fullName
+            id
+        }
+    }
+}
+
