@@ -311,6 +311,8 @@ type Route {
   fromLocationCountySubCounty: UnifiedLocationCountySubCounty
 
   toLocationCountySubCounty: UnifiedLocationCountySubCounty
+
+  schedule: Schedule
 }
 
 input RouteDto {

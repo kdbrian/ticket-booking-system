@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import src.main.graphql.GetAllRoutesQuery
+import src.main.graphql.GetRouteByIdQuery
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,6 +24,10 @@ class RoutesViewModel @Inject constructor(
     private val _routesUiState = MutableStateFlow(UiStateWrapper<GetAllRoutesQuery.Data>())
     val routesUiState: StateFlow<UiStateWrapper<GetAllRoutesQuery.Data>> =
         _routesUiState.asStateFlow()
+
+    private val _routeByIdUiState = MutableStateFlow(UiStateWrapper<GetRouteByIdQuery.Data>())
+    val routesByIdUiState: StateFlow<UiStateWrapper<GetRouteByIdQuery.Data>> =
+        _routeByIdUiState.asStateFlow()
 
     init {
         getRoutes()
@@ -38,10 +43,15 @@ class RoutesViewModel @Inject constructor(
         }
     }.launchIn(viewModelScope)
 
-    private fun getRouteById(id : String){
-        routesUseCase.getRouteById(id).onEach {
+    fun getRouteById(id : String)=
+        routesUseCase.getRouteById(id).onEach {emission ->
+            when(emission){
+                is ResponseWrapper.Error -> _routeByIdUiState.update { UiStateWrapper(error = emission.message.toString()) }
+                is ResponseWrapper.Loading -> _routeByIdUiState.update { UiStateWrapper(isLoading = true) }
+                is ResponseWrapper.Success -> _routeByIdUiState.update { UiStateWrapper(data = emission.data) }
+            }
+        }.launchIn(viewModelScope)
 
-        }
-    }
+
 }
 

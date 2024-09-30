@@ -24,16 +24,42 @@ query GetAllRoutes{
 query GetRouteById($id : ID!){
     getRouteById(id: $id){
         id
+        vehicles {
+            leavingTime
+            price
+            seats {
+                isOccupied
+                seatNo
+            }
+            timeOfTravel
+            updateslug
+            vehicleName
+            price
+        }
+
         fromLocationName
         toLocationName
-        vehicles {
-            seats {
-                seatNo
-                isOccupied
+
+        toLocationCountySubCounty {
+            subCounty {
+                subCountyName
             }
-            price
-            seatCount
-            vehicleId
+            county {
+                countyName
+            }
+        }
+
+        fromLocationCountySubCounty {
+            subCounty {
+                subCountyName
+            }
+            county {
+                countyName
+            }
+        }
+
+        schedule {
+            id
         }
     }
 }

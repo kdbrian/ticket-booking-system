@@ -11,13 +11,19 @@ import java.util.Date
 
 class RouteListAdapter(
     val routes: GetAllRoutesQuery.Data,
-    val count: Int = 2
+    val count: Int = 2,
+    val onclick : (id : String) -> Unit
 ) : RecyclerView.Adapter<RouteListAdapter.VH>() {
 
     inner class VH(val view: View) : RecyclerView.ViewHolder(view) {
 
         fun bindItem(currentRoute: GetAllRoutesQuery.GetAllRoute) {
-            RouteitemBinding.bind(view).also { it.route = currentRoute }
+            RouteitemBinding.bind(view).also {
+                view.setOnClickListener {
+                    onclick(currentRoute.id!!)
+                }
+                it.route = currentRoute
+            }
         }
     }
 
