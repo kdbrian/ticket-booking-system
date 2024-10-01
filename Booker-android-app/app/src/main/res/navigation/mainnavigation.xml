@@ -59,7 +59,11 @@
         android:id="@+id/routeScreen"
         android:name="io.github.junrdev.booker.presentation.ui.screens.RouteScreen"
         android:label="fragment_route_screen"
-        tools:layout="@layout/fragment_route_screen" />
+        tools:layout="@layout/fragment_route_screen" >
+        <action
+            android:id="@+id/action_routeScreen_to_viewBookTicket"
+            app:destination="@id/viewBookTicket" />
+    </fragment>
     <dialog
         android:id="@+id/datePickerDialog"
         android:name="io.github.junrdev.booker.presentation.ui.screens.DatePickerDialog"

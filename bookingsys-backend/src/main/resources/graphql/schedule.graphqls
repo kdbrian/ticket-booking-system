@@ -1,7 +1,8 @@
 type Schedule{
     id : ID,
     routes : [Route],
-    phone : String
+    phone : String,
+    company : Company
 }
 
 input ScheduleDto{

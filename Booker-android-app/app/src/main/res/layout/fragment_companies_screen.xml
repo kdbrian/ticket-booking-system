@@ -15,16 +15,38 @@
             >
 
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="14dp"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="?attr/actionBarTheme"
-                app:menu="@menu/sortmenu"
-                app:navigationIcon="@drawable/round_arrow_back_ios_new_24"
-                app:title="Available companies" />
+                android:elevation="12dp"
+                android:orientation="horizontal"
+                android:padding="24dp">
+
+                <ImageView
+                    android:id="@+id/imageView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/round_arrow_back_ios_new_24" />
+
+                <TextView
+                    android:id="@+id/textView45"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ubuntubold"
+                    android:text="Available companies"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/round_filter_list_24" />
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/companyList"

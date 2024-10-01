@@ -18,6 +18,26 @@ query GetAllRoutes{
                 subCountyName
             }
         }
+        vehicles {
+            leavingTime
+            price
+            seats {
+                isOccupied
+                seatNo
+            }
+            timeOfTravel
+            updateslug
+            vehicleName
+            price
+        }
+        schedule {
+            id
+            company {
+                fullName
+                countyName
+                subCountyName
+            }
+        }
     }
 }
 
@@ -60,6 +80,11 @@ query GetRouteById($id : ID!){
 
         schedule {
             id
+            company {
+                fullName
+                countyName
+                subCountyName
+            }
         }
     }
 }

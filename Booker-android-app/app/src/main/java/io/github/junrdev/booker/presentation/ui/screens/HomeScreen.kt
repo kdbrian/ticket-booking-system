@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -84,7 +85,10 @@ class HomeScreen : Fragment() {
                     }
 
                     if (state.data != null) {
-                        routeList.adapter = RouteListAdapter(state.data)
+                        routeList.adapter = RouteListAdapter(state.data){
+                            findNavController()
+                                .navigate(R.id.action_homeScreen_to_viewBookTicket, bundleOf("route" to it))
+                        }
                     }
 
                     if (state.error != null) {
@@ -181,6 +185,10 @@ class HomeScreen : Fragment() {
 
             CoroutineScope(Dispatchers.Main).launch {
                 clientsViewModel.getClientById("66f89f805497c47c1fcb7660")
+                    .invokeOnCompletion {
+                        println("Got client")
+                        println(it)
+                    }
                 clientsViewModel.clientUiState.collect { state ->
 
                     if (state.isLoading) {
@@ -236,6 +244,11 @@ class HomeScreen : Fragment() {
 
             button.setOnClickListener {
                 findNavController().navigate(R.id.action_homeScreen_to_searchResults)
+            }
+
+
+            imageView3.setOnClickListener {
+                findNavController().navigate(R.id.action_homeScreen_to_routeScreen)
             }
 
 

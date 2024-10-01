@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.junrdev.booker.databinding.FragmentViewBookTicketBinding
 import io.github.junrdev.booker.presentation.viewmodel.RoutesViewModel
@@ -61,13 +62,22 @@ class ViewBookTicket : Fragment() {
 
                     if (state.data != null) {
                         delay(800L)
+                        route = state.data
+
+                        println("Details ${state.data.getRouteById}")
+                        val vehicles = state.data.getRouteById.vehicles
                     }
 
                     if (state.error != null) {
+                        showToast("Failed to get route")
                     }
 
                 }
 
+            }
+
+            imageView6.setOnClickListener {
+                findNavController().navigateUp()
             }
 
 

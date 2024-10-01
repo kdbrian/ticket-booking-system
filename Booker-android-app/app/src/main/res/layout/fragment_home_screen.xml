@@ -82,13 +82,13 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <TextView
@@ -117,12 +117,10 @@
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/routeList"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:clipToPadding="true"
                             android:padding="5dp"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             tools:itemCount="2"
                             tools:listitem="@layout/routeitem" />
 
@@ -142,7 +140,7 @@
                             android:layout_marginHorizontal="8dp"
                             android:background="@drawable/roundedshapedstroked12dp"
                             android:orientation="horizontal"
-                            android:padding="12dp">
+                            android:padding="8dp">
 
                             <EditText
                                 android:id="@+id/editTextDate2"
@@ -325,11 +323,11 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:padding="12dp"
-                    tools:itemCount="2"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="2"
                     tools:listitem="@layout/recentactivityitem" />
             </LinearLayout>
         </ScrollView>
